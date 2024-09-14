@@ -73,17 +73,22 @@ public class LoginScene extends AbstractScene {
         if (application.runtimeSettings.password != null || application.runtimeSettings.oauthAccessToken != null) {
             LookupHelper.<CheckBox>lookup(layout, "#savePassword").setSelected(true);
         }
+        LookupHelper.<ButtonBase>lookupIfPossible(layout, "#exit")
+                    .ifPresent((b) -> b.setOnAction((e) -> currentStage.close()));
+        LookupHelper.<ButtonBase>lookupIfPossible(layout, "#minimize")
+                    .ifPresent((b) -> b.setOnAction((e) -> currentStage.hide()));
+        currentStage.enableMouseDrag(layout);
         autoenter = LookupHelper.lookup(layout, "#autoenter");
         autoenter.setSelected(application.runtimeSettings.autoAuth);
         autoenter.setOnAction((event) -> application.runtimeSettings.autoAuth = autoenter.isSelected());
         content = LookupHelper.lookup(layout, "#content");
         if (application.guiModuleConfig.createAccountURL != null) {
-            LookupHelper.<Text>lookup(header, "#createAccount")
+            LookupHelper.<Text>lookup(layout, "#createAccount")
                         .setOnMouseClicked((e) -> application.openURL(application.guiModuleConfig.createAccountURL));
         }
 
         if (application.guiModuleConfig.forgotPassURL != null) {
-            LookupHelper.<Text>lookup(header, "#forgotPass")
+            LookupHelper.<Text>lookup(layout, "#forgotPass")
                         .setOnMouseClicked((e) -> application.openURL(application.guiModuleConfig.forgotPassURL));
         }
         authList = LookupHelper.lookup(layout, "#authList");
@@ -255,10 +260,10 @@ public class LoginScene extends AbstractScene {
         processing(authRequest, application.getTranslation("runtime.overlay.processing.text.auth"),
                    (result) -> contextHelper.runInFxThread(() -> onSuccessLogin(new SuccessAuth(result, null, null))),
                    (error) -> {
-                        if(refreshIfError && error.equals(AuthRequestEvent.OAUTH_TOKEN_EXPIRE)) {
-                            refreshToken();
-                            return;
-                        }
+                       if(refreshIfError && error.equals(AuthRequestEvent.OAUTH_TOKEN_EXPIRE)) {
+                           refreshToken();
+                           return;
+                       }
                        if (error.equals(AuthRequestEvent.OAUTH_TOKEN_INVALID)) {
                            application.runtimeSettings.oauthAccessToken = null;
                            application.runtimeSettings.oauthRefreshToken = null;
@@ -334,9 +339,11 @@ public class LoginScene extends AbstractScene {
                 application.gui.welcomeOverlay.reset();
             }
             showOverlay(application.gui.welcomeOverlay,
-                                                      (e) -> application.gui.welcomeOverlay.hide(2000,
-                                                                                                 (f) -> onGetProfiles()));});
+                        (e) -> application.gui.welcomeOverlay.hide(2000,
+                                                                   (f) -> onGetProfiles()));});
     }
+
+
 
     public void onGetProfiles() {
         processing(new ProfilesRequest(), application.getTranslation("runtime.overlay.processing.text.profiles"),

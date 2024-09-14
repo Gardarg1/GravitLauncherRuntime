@@ -1,4 +1,9 @@
 /*-- Вертикальная полоса на главной сцене --*/
+#authtext{
+	-fx-font-family: 'Inter 18pt Medium';
+	-fx-font-size: 32;
+	-fx-text-alignment: center;
+}
 .vline {
     -fx-background-color: -fx-glass;
 }
@@ -8,16 +13,16 @@
 /*-- Ввод данных --*/
 #login,
 PasswordField {
+	-fx-font-family: 'Inter 18pt Medium';
     -fx-background-color: -fx-glass;
     -fx-background-radius: 10px;
     -fx-font-size: 12px;
-    -fx-text-fill: -fx-header;
-    -fx-font-weight: bold;
+    -fx-text-fill: #797A7C;
     -fx-cursor: text;
 }
 PasswordField:focused,
 #login:focused {
-    -fx-text-fill: -fx-black2C;
+    -fx-text-fill: black;
 }
 #1st,
 #2st,
@@ -35,7 +40,8 @@ PasswordField:focused,
 /*-- Чекбоксы --*/
 #savePassword,
 #autoenter {
-    -fx-font-size: 12px;
+	-fx-font-family: 'Inter 18pt Medium';
+    -fx-font-size: 10px;
     -fx-background-image: url('../../images/icons/checkbox_off.png');
     -fx-text-fill: -fx-black2C;
 }
@@ -50,23 +56,52 @@ PasswordField:focused,
 }
 /*-- Поля --*/
 #login {
-      -fx-background-image:url('../../images/icons/user.png');
-      -fx-background-repeat: no-repeat;
+	-fx-font-family: 'Inter 18pt Medium';
+	  -fx-background-color: white;
+	  -fx-border-color:#797A7C;
+	  -fx-border-width:0.4;
+	  -fx-border-radius: 9.6;
       -fx-background-position: left center;
-      -fx-padding: 0 0 0 24px;
+}
+#textRules2{
+	-fx-font-size:10px;
+	-fx-underline: true;
+	-fx-text-alignment: center;
+	-fx-font-family: "Inter 18pt Medium";
+	
+}
+#textRules1{
+	-fx-font-size:10px;
+	-fx-fill: #797A7C;
+	-fx-text-alignment: center;
+	-fx-font-family: "Inter 18pt Medium";
 }
 PasswordField, #totp {
-      -fx-background-image:url('../../images/icons/lock.png');
-      -fx-background-repeat: no-repeat;
+	-fx-font-family: 'Inter 18pt Medium';
+	  -fx-background-color: white;
+	  -fx-border-width:0.4;
       -fx-background-position: left center;
-      -fx-padding: 0 0 0 24px;
+	  -fx-border-color:#797A7C;
+	  -fx-border-radius: 9.6;
+}
+#discordButton{
+	-fx-font-family: 'Inter 18pt Medium';
+	-fx-background-color:white;
+	-fx-border-radius:12.89;
+	-fx-background-radius:12.89;
+}
+.discordtext{
+	-fx-fill: #5865F2;
+	-fx-font-size: 9;
 }
 /*-- Ссылки --*/
 #createAccount {
     -fx-font-weight: bold;
+	-fx-font-family: 'Inter 18pt Medium';
     -fx-font-size: 9px;
-    -fx-text-align: left;
-    -fx-fill: -fx-green;
+    -fx-text-align: right;
+	-fx-text-alignment: right;
+    -fx-fill: #FD7E14;
 }
 #createAccount:hover,
 #createAccount:pressed {
@@ -74,19 +109,19 @@ PasswordField, #totp {
     -fx-cursor: hand;
 }
 #forgotPass {
-    -fx-font-weight: bold;
-    -fx-font-size: 9px;
+	-fx-font-family: 'Inter 18pt Medium';
+    -fx-font-size: 8px;
     -fx-text-align: right;
-    -fx-fill: -fx-grayD;
+	-fx-fill: FD7E14;
 }
 #forgotPass:hover,
 #forgotPass:pressed {
-    -fx-fill: -fx-black2C-hover;
     -fx-cursor: hand;
 }
 .textLogin {
-    -fx-fill: -fx-grayD;
-    -fx-font-size: 9px;
+	-fx-font-family: 'Inter 18pt Medium';
+    -fx-fill: black;
+    -fx-font-size: 10px;
     -fx-text-align: left;
 }
 Rectangle {
@@ -103,27 +138,41 @@ Rectangle {
 } */
 /*-- Кнопка входа --*/
 #authButton {
+	-fx-font-family: 'Inter 18pt Medium';
     -fx-font-weight: bold;
-    -fx-font-size: 24px;
-    -fx-text-fill: -fx-black;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+	-fx-background-radius: 10;
 }
 /* --START-- Enum AuthButtonState Button */
 .activeButton {
-    -fx-background-color: -fx-green;
+    -fx-background-color: #FD7E14;
 }
 .activeButton:hover {
-    -fx-background-color: -fx-green-hover;
+    -fx-background-color: #E06C0B;
 }
 .unactiveButton {
-    -fx-background-color: -fx-blackCE;
+    -fx-background-color: #FD7E14;
 }
 .unactiveButton:hover {
-    -fx-background-color: -fx-blackCE-hover;
+    -fx-background-color: #E06C0B;
 }
 .errorButton {
     -fx-background-color: -fx-red;
 }
 .errorButton:hover {
     -fx-background-color: -fx-red-hover;
+}
+#discordview{
+	
+	-fx-background-radius: 8.08;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../../images/icons/discord2.png");
+    -fx-background-position: center center; 
+}
+
+#authtextdescription{
+	-fx-font-size: 14;
+	-fx-text-alignment: center;
 }
 /* --END-- */
