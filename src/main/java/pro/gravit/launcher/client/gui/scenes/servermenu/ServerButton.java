@@ -1,5 +1,6 @@
 package pro.gravit.launcher.client.gui.scenes.servermenu;
 
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 import pro.gravit.launcher.client.gui.JavaFXApplication;
 import pro.gravit.launcher.client.gui.helper.LookupHelper;
 import pro.gravit.launcher.client.gui.impl.AbstractVisualComponent;
@@ -19,18 +21,25 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class ServerButton extends AbstractVisualComponent {
     private static final String SERVER_BUTTON_FXML = "components/serverButton.fxml";
+    private static final String SERVER_BUTTON_CUSTOM_FXML = "components/serverButton/%s.fxml";
     private static final String SERVER_BUTTON_DEFAULT_IMAGE = "images/servers/example.png";
     private static final String SERVER_BUTTON_CUSTOM_IMAGE = "images/servers/%s.png";
     public ClientProfile profile;
     private Button saveButton;
     private Button resetButton;
     private Region serverLogo;
-
-    protected ServerButton(JavaFXApplication application, ClientProfile profile) {
-        super(SERVER_BUTTON_FXML, application);
+    public ServerButton(JavaFXApplication application, ClientProfile profile) {
+        super(getFXMLPath(application, profile), application);
         this.profile = profile;
     }
-
+    private static String getFXMLPath(JavaFXApplication application, ClientProfile profile) {
+        String customFxmlName = String.format(SERVER_BUTTON_CUSTOM_FXML, profile.getUUID());
+        URL customFxml = application.tryResource(customFxmlName);
+        if (customFxml != null) {
+            return customFxmlName;
+        }
+        return SERVER_BUTTON_FXML;
+    }
     @Override
     public String getName() {
         return "serverButton";
@@ -39,18 +48,22 @@ public class ServerButton extends AbstractVisualComponent {
     @Override
     protected void doInit() {
         LookupHelper.<Labeled>lookup(layout, "#nameServer").setText(profile.getTitle());
-        LookupHelper.<Labeled>lookup(layout, "#genreServer").setText(profile.getVersion().toString());
-        this.serverLogo = LookupHelper.lookup(layout, "#serverLogo");
-        URL logo = application.tryResource(String.format(SERVER_BUTTON_CUSTOM_IMAGE, profile.getUUID().toString()));
-        if(logo == null) {
-            logo = application.tryResource(SERVER_BUTTON_DEFAULT_IMAGE);
-        }
-        if(logo != null) {
-            this.serverLogo.setBackground(new Background(new BackgroundImage(new Image(logo.toString()),
-                                                                             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                                                                             BackgroundPosition.CENTER, new BackgroundSize(0.0, 0.0, true, true, false, true))));
-            JavaFxUtils.setRadius(this.serverLogo, 20.0);
-        }
+        LookupHelper.<Labeled>lookup(layout, "#genreServer").setText(profile.getInfo());
+
+        layout.setOnMouseEntered((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), layout);
+            transition.setToX(1.05);
+            transition.setToY(1.05);
+            transition.play();
+        });
+        layout.setOnMouseExited((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), layout);
+            transition.setToX(1);
+            transition.setToY(1);
+            transition.play();
+        });
+
+
         AtomicLong currentOnline = new AtomicLong(0);
         AtomicLong maxOnline = new AtomicLong(0);
         Runnable update = () -> contextHelper.runInFxThread(() -> {
@@ -69,8 +82,7 @@ public class ServerButton extends AbstractVisualComponent {
                 update.run();
             });
         }
-        saveButton = LookupHelper.lookup(layout, "#save");
-        resetButton = LookupHelper.lookup(layout, "#reset");
+
     }
 
     @Override
@@ -82,17 +94,6 @@ public class ServerButton extends AbstractVisualComponent {
         layout.setOnMouseClicked(eventHandler);
     }
 
-    public void enableSaveButton(String text, EventHandler<ActionEvent> eventHandler) {
-        saveButton.setVisible(true);
-        if (text != null) saveButton.setText(text);
-        saveButton.setOnAction(eventHandler);
-    }
-
-    public void enableResetButton(String text, EventHandler<ActionEvent> eventHandler) {
-        resetButton.setVisible(true);
-        if (text != null) resetButton.setText(text);
-        resetButton.setOnAction(eventHandler);
-    }
 
     public void addTo(Pane pane) {
         if (!isInit()) {

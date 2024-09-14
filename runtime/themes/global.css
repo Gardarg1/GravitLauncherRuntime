@@ -1,0 +1,301 @@
+/*-- DrLeonardo styles refactor --*/
+@import "./variables.css";
+/*-- Подключение шрифтов --*/
+@font-face {
+    font-family: 'TT Firs Neue Light Medium';
+    src: url('../fonts/TTFirsNeue-Medium.ttf');
+}
+@font-face {
+    font-family: 'TT Firs Neue Light Regular';
+    src: url('../fonts/TTFirsNeue-Regular.ttf');
+}
+@font-face {
+    font-family: 'TT Firs Neue DemiBold';
+    src: url('../fonts/TTFirsNeue-ExtraBold.ttf');
+}
+
+
+Button,
+CheckBox,
+ComboBox,
+RadioButton {
+    -fx-cursor: hand;
+}
+.root {
+    -fx-background-color: transparent;
+}
+
+.medium{
+    -fx-font-family: 'TT Firs Neue Light';
+}
+.regular{
+    -fx-font-family: 'TT Firs Neue';
+}
+.demibold{
+    -fx-font-family: 'TT Firs Neue DemiBold';
+}
+
+
+
+
+
+
+.icon-button{
+    -fx-padding:0;
+    -fx-background-color:transparent;
+
+}
+
+.icon-button{
+}
+.icon-button:hover{
+    -fx-opacity:0.5;
+}
+
+#back{
+    -fx-padding:0;
+    -fx-insets:none;
+}
+
+
+#yt,#ds,#facebook,#exit,#minimize{
+    -fx-background-color:transparent;
+    -fx-padding:0;
+}
+
+/*-- Управление прозрачностью --*/
+#transparent {
+    -fx-background-color:  #3B3B3B;
+    -fx-background-radius:24;
+    -fx-background-size: cover;
+}
+
+#layout{
+    -fx-border-color:linear-gradient(from 20% 20% to 100% 100%, rgba(255,255,255,0.6), transparent,rgba(255,255,255,0.6));
+    -fx-border-radius:24;
+    -fx-background-radius:24;
+}
+.background {
+    -fx-border-color:linear-gradient(from 20% 20% to 100% 100%, rgba(255,255,255,0.6), transparent,rgba(255,255,255,0.6));
+    -fx-border-radius:24;
+    -fx-background-image: url('../images/background.png');
+    -fx-background-size: cover;
+    -fx-background-radius:24;
+}
+.blur {
+    
+    -fx-background-image: url('../images/background-blur.png') !important;
+    -fx-background-size: cover;
+}
+/* (тех. Кнопки) */
+.invisible {
+    -fx-opacity: 0;
+}
+.visible {
+    -fx-opacity: 1;
+}
+#header{
+    -fx-background-color: #292927;
+    -fx-background-radius: 24 24 0 0;
+}
+#deauth{
+    -fx-background-color:transparent;
+    -fx-padding:0;
+}
+#avatar {
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-font-smoothing-type: lcd;
+}
+/*-- Заголовки --*/
+#dialogHeader,
+#headingDialog,
+#headerDescription {
+    -fx-fill: -fx-black2C;
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/*-- Кнопка отправить --*/
+.send-button-text {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-align: center;
+    -fx-fill: -fx-header;
+}
+.send-button-text:hover,
+.send-button-text:pressed {
+    -fx-fill: -fx-header-hover;
+}
+/*-- Контекстное меню --*/
+.context-menu {
+    -fx-background-color: -fx-whiteG;
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+    -fx-text-fill: -fx-black2C;
+    -fx-background-radius: 5px;
+}
+.menu-item {
+    -fx-background-radius: 0px;
+}
+.menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: -fx-glass;
+}
+.menu-item>.graphic-container {
+    -fx-padding: 0em 0.333em 0em 0em;
+}
+.menu-item .label {
+    -fx-text-fill: -fx-black2C;
+}
+.menu-item:focused .label {
+    -fx-text-fill: -fx-black2C-hover;
+    -fx-font-weight: bold;
+}
+#back{
+    -fx-cursor:hand;
+}
+/* check-box элементы */
+.check-box {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-background-image: url('../images/icons/checkbox_off.png');
+    -fx-background-repeat: no-repeat;
+    -fx-padding:0 0 0 0;
+    -fx-label-padding: -4 0 5 10;
+    -fx-font-size: 14px;
+    -fx-text-align: left;
+}
+.check-box .mark {
+    -fx-background-color: transparent;
+}
+.check-box .box {
+    -fx-background-color: transparent;
+}
+.check-box:selected {
+    -fx-background-color: transparent;
+    -fx-background-image: url('../images/icons/checkbox_on.png');
+    -fx-background-repeat: no-repeat;
+}
+.check-box:selected .mark {
+    -fx-background-color: transparent;
+}
+.check-box:selected .box {
+    -fx-background-color: transparent;
+}
+/* Скролл панели */
+#scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane .content {
+    -fx-background-color: transparent;
+}
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+.increment-button,
+.decrement-button,
+.increment-arrow,
+.decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-black2C-hover;
+    -fx-background-radius: 10;
+    -fx-padding: 10 0 0 0px;
+    -fx-background-insets: 0, 0, 0, 10;
+}
+.scroll-bar {
+    -fx-font-size: 6px;
+}
+.scroll-pane>.corner {
+    -fx-background-color: transparent;
+}
+/* choice-box элементы */
+.choice-box .context-menu {
+    -fx-background-color: -fx-whiteG;
+    -fx-pref-width: 130px;
+}
+.choice-box .menu-item:focused {
+    -fx-background-color: -fx-violet;
+}
+.choice-box .menu-item>.label {
+    -fx-text-fill: -fx-black2C;
+}
+.choice-box .menu-item:focused>.label {
+    -fx-text-fill: -fx-white;
+}
+.choice-box {
+    -fx-background-color: -fx-whiteG;
+    -fx-mark-color: -fx-whiteG;
+}
+.choice-box>.label {
+    -fx-text-fill: -fx-whiteG;
+}
+/* combo-box элементы */
+.combo-box {
+    -fx-background-color: #292927;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 5px;
+    -fx-background-image: url('../images/icons/radio_off.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-text-fill: #fff;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+.combo-box .list-cell {
+    
+    -fx-alignment: CENTER;
+    -fx-text-fill:   #fff;
+}
+.combo-box-popup .list-view {
+    
+    -fx-alignment: CENTER;
+    -fx-background-color:   #fff;
+}
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: -fx-black2C;
+    -fx-padding: 5;
+    -fx-background-color: #fff;
+}
+.combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: -fx-glass;
+    -fx-text-fill: -fx-black2C-hover;
+    -fx-font-weight: bold;
+}
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: -fx-glass;
+    -fx-text-fill: -fx-black2C-hover;
+}
+.combo-box-popup .list-cell {
+    -fx-background-color: -fx-whiteG;
+    -fx-text-fill: -fx-black2C;
+}
+.combo-box .arrow {
+    -fx-background-color: transparent;
+}
+.combo-box .arrow-button {
+    -fx-background-image: url('../images/icons/checkbox_arrow_button.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+    -fx-background-position: center center;
+    -fx-background-size: 20px 11px;
+}
+/*-- DrLeonardo styles refactor --*/

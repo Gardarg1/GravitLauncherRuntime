@@ -1,34 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="560.0" prefWidth="930.0" styleClass="background" stylesheets="@serverinfo.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <!-- Навбар -->
-    <AnchorPane id="header" prefHeight="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <AnchorPane prefHeight="80.0" prefWidth="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <Label id="serverName" maxWidth="400.0" prefHeight="32.0" styleClass="scene-header" text="ServerName" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="34.0" />
-                <!-- Кнопки управления -->
-                <HBox id="controls" spacing="10.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="34.0">
-                    <fx:include source="../../components/buttons/clientSettings.fxml" />
-                    <fx:include source="../../components/buttons/settings.fxml" />
-                    <fx:include source="../../components/buttons/minimize.fxml" />
-                    <fx:include source="../../components/buttons/exit.fxml" />
-                </HBox>
-            </children>
-        </AnchorPane>
-    </AnchorPane>
-    <fx:include source="../../components/panels/leftpanel.fxml" />
-    <AnchorPane prefHeight="480.0" prefWidth="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-        <children>
-            <ScrollPane id="serverDescriptionPane" fitToWidth="true" hbarPolicy="NEVER" pannable="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
-                <content>
-                    <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefWidth="149.0" text="Server description" wrapText="true" />
-                </content>
-            </ScrollPane>
-        </children>
-    </AnchorPane>
+<AnchorPane fx:id="serverPane" minHeight="560.0" minWidth="930.0" prefHeight="560.0" prefWidth="930.0" styleClass="background" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane id="servers" hbarPolicy="NEVER" layoutX="109.0" layoutY="291.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="155.5" AnchorPane.leftAnchor="129.34" AnchorPane.rightAnchor="30.66" AnchorPane.topAnchor="64.5">
+         <content>
+            <FlowPane prefHeight="506.0" prefWidth="770.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+               </padding></FlowPane>
+         </content>
+      </ScrollPane>
+      <SVGPath id="cube" content="M1.34204 7.09814V3.26481C1.34204 2.20627 2.20016 1.34814 3.25871 1.34814H20.1094C21.168 1.34814 22.0261 2.20627 22.0261 3.26481V7.09814M1.34204 7.09814H22.0261M1.34204 7.09814V12.8481M22.0261 7.09814V12.8481M22.0261 12.8481V16.6815C22.0261 17.74 21.1679 18.5981 20.1094 18.5981H3.25871C2.20016 18.5981 1.34204 17.74 1.34204 16.6815V12.8481M22.0261 12.8481H1.34204M5.77433 9.97314H5.78911M5.77433 4.22314H5.78911M5.77433 15.7231H5.78911&#10;M1.34204 3.26481C1.34204 2.20627 2.20016 1.34814 3.25871 1.34814H20.1094C21.1679 1.34814 22.0261 2.20627 22.0261 3.26481V7.09814V12.8481V16.6815C22.0261 17.74 21.1679 18.5981 20.1094 18.5981H3.25871C2.20016 18.5981 1.34204 17.74 1.34204 16.6815V12.8481V7.09814V3.26481Z" layoutX="162.0" layoutY="38.0" stroke="BLACK" strokeWidth="1.92" AnchorPane.bottomAnchor="520.6" AnchorPane.leftAnchor="129.34" AnchorPane.rightAnchor="779.97" AnchorPane.topAnchor="22.15" />
+      <Label id="server_list" layoutX="162.0" layoutY="43.0" text="%runtime.scenes.servermenu.servers" AnchorPane.bottomAnchor="520.7" AnchorPane.leftAnchor="155.03" AnchorPane.topAnchor="22.28" />
+      <AnchorPane id="download" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="482.0">
+         <children>
+            <Button id="download_button" alignment="CENTER" disable="true" layoutX="129.0" layoutY="11.0" mnemonicParsing="false" prefHeight="39.17" prefWidth="134.48" text="%runtime.scenes.servermenu.download" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="604.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="13.0">
+               <graphic>
+                  <SVGPath id="download_svg" content="M8.71788 5.58368L6.27344 7.96463M6.27344 7.96463L3.82899 5.58368M6.27344 7.96463V0.821777M11.7734 7.96463V9.76969C11.7734 10.3507 11.3024 10.8218 10.7214 10.8218H1.82552C1.24447 10.8218 0.773437 10.3507 0.773437 9.76969L0.773437 7.96463" fillRule="EVEN_ODD" stroke="BLACK" strokeWidth="1.05" />
+               </graphic>
+            </Button>
+            <Label id="server_tap" layoutX="36.0" layoutY="30.0" text="%runtime.scenes.servermenu.selected_server" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="18.0" />
+         </children>
+      </AnchorPane>
+      <Button id="exit" alignment="CENTER" layoutX="904.0" layoutY="20.03" maxHeight="16.22" maxWidth="16.22" minHeight="16.22" minWidth="16.22" mnemonicParsing="false" prefHeight="16.22" prefWidth="16.22" AnchorPane.bottomAnchor="517.75" AnchorPane.leftAnchor="877.71" AnchorPane.rightAnchor="29.35" AnchorPane.topAnchor="19.31" />
+      <Button id="hide" layoutX="894.0" layoutY="23.0" minHeight="1.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="10.0" AnchorPane.bottomAnchor="528.72" AnchorPane.leftAnchor="858.84" AnchorPane.rightAnchor="61.16" AnchorPane.topAnchor="30.28">
+         <graphic>
+            <Line endX="10.0" stroke="#797a7c" strokeWidth="2.0" />
+         </graphic>
+      </Button>
+      <AnchorPane id="header" prefHeight="80.0">
+         <children>
+            <ImageView layoutX="28.0" layoutY="25.0" AnchorPane.bottomAnchor="495.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.48" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../../images/icons/logo.png" />
+               </image>
+            </ImageView>
+            <AnchorPane id="home" layoutX="23.0" layoutY="89.0" prefHeight="49.0" prefWidth="56.0">
+               <children>
+                  <SVGPath id="home_svg" content="M16.0167 5.64177C16.6261 6.00149 17 6.65646 17 7.3641V16.5C17 17.6046 16.1046 18.5 15 18.5H13C11.8954 18.5 11 17.6046 11 16.5V12.4999C11 11.3954 10.1046 10.4999 9 10.4999C7.89543 10.4999 7 11.3954 7 12.4999V16.5C7 17.6046 6.10457 18.5 5 18.5H3C1.89543 18.5 1 17.6046 1 16.5V7.3641C1 6.65646 1.37395 6.00149 1.98335 5.64177L7.98335 2.10011C8.61056 1.72988 9.38944 1.72988 10.0167 2.10011L16.0167 5.64177Z" fill="#fd7e14" layoutX="20.0" layoutY="3.0" />
+                  <Label id="home_text" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.home" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane id="servers2" layoutX="21.0" layoutY="168.0" prefHeight="49.0" prefWidth="56.0">
+               <children>
+                  <SVGPath id="servers_svg" content="M1.08203 6.76986V3.09418C1.08203 2.07917 1.90486 1.25635 2.91987 1.25635H19.0775C20.0925 1.25635 20.9154 2.07918 20.9154 3.09419V6.76986M1.08203 6.76986H20.9154M1.08203 6.76986V12.2834M20.9154 6.76986V12.2834M20.9154 12.2834V15.9591C20.9154 16.9741 20.0925 17.7969 19.0775 17.7969H2.91987C1.90486 17.7969 1.08203 16.9741 1.08203 15.959V12.2834M20.9154 12.2834H1.08203M5.33203 9.52662H5.3462M5.33203 4.0131H5.3462M5.33203 15.0401H5.3462" fill="WHITE" fillRule="EVEN_ODD" layoutX="20.08" layoutY="2.76" stroke="BLACK" strokeWidth="1.84" />
+                  <Label id="servers_text" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.servers" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane id="acc" layoutX="23.5" layoutY="245.05" prefHeight="49.0" prefWidth="56.0">
+               <children>
+                  <SVGPath id="acc_svg" content="M15.71 13.2643C16.6904 12.493 17.406 11.4352 17.7572 10.2383C18.1085 9.04129 18.0779 7.76459 17.6698 6.58579C17.2617 5.40699 16.4963 4.38472 15.4801 3.66118C14.4639 2.93764 13.2474 2.54883 12 2.54883C10.7525 2.54883 9.53611 2.93764 8.51993 3.66118C7.50374 4.38472 6.73834 5.40699 6.33021 6.58579C5.92208 7.76459 5.89151 9.04129 6.24276 10.2383C6.59401 11.4352 7.3096 12.493 8.29 13.2643C6.61007 13.9374 5.14428 15.0537 4.04889 16.4942C2.95349 17.9348 2.26956 19.6456 2.07 21.4443C2.05555 21.5756 2.06711 21.7085 2.10402 21.8354C2.14093 21.9622 2.20246 22.0806 2.28511 22.1836C2.45202 22.3918 2.69478 22.5252 2.96 22.5543C3.22521 22.5835 3.49116 22.5061 3.69932 22.3392C3.90749 22.1723 4.04082 21.9295 4.07 21.6643C4.28958 19.7095 5.22168 17.9041 6.68822 16.5931C8.15475 15.2821 10.0529 14.5574 12.02 14.5574C13.9871 14.5574 15.8852 15.2821 17.3518 16.5931C18.8183 17.9041 19.7504 19.7095 19.97 21.6643C19.9972 21.91 20.1144 22.137 20.2991 22.3013C20.4838 22.4657 20.7228 22.5558 20.97 22.5543H21.08C21.3421 22.5242 21.5817 22.3916 21.7466 22.1856C21.9114 21.9795 21.9881 21.7167 21.96 21.4543C21.7595 19.6505 21.0719 17.9353 19.9708 16.4925C18.8698 15.0497 17.3969 13.9338 15.71 13.2643ZM12 12.5543C11.2089 12.5543 10.4355 12.3197 9.77772 11.8802C9.11992 11.4407 8.60723 10.816 8.30448 10.0851C8.00173 9.35415 7.92251 8.54989 8.07686 7.77396C8.2312 6.99804 8.61216 6.28531 9.17157 5.7259C9.73098 5.16649 10.4437 4.78552 11.2196 4.63118C11.9956 4.47684 12.7998 4.55606 13.5307 4.85881C14.2616 5.16156 14.8863 5.67425 15.3259 6.33204C15.7654 6.98984 16 7.7632 16 8.55432C16 9.61519 15.5786 10.6326 14.8284 11.3828C14.0783 12.1329 13.0609 12.5543 12 12.5543Z" fill="#fd7e14" fillRule="EVEN_ODD" layoutX="17.56" layoutY="1.99" stroke="BLACK" AnchorPane.leftAnchor="17.56" AnchorPane.rightAnchor="17.53" />
+                  <Label id="acc_text" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.account" AnchorPane.leftAnchor="-2.5" AnchorPane.rightAnchor="-2.5" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane id="mods" layoutX="9.0" layoutY="324.05" prefHeight="49.0" prefWidth="84.0" visible="false">
+               <children>
+                  <SVGPath id="mods_svg" content="M16.5 9.95416L7.5 4.76416&#10;M3.27002 7.51416L12 12.5642L20.73 7.51416&#10;M21 16.5541V8.5541C20.9996 8.20338 20.9071 7.85891 20.7315 7.55526C20.556 7.25162 20.3037 6.99946 20 6.8241L13 2.8241C12.696 2.64856 12.3511 2.55615 12 2.55615C11.6489 2.55615 11.304 2.64856 11 2.8241L4 6.8241C3.69626 6.99946 3.44398 7.25162 3.26846 7.55526C3.09294 7.85891 3.00036 8.20338 3 8.5541V16.5541C3.00036 16.9048 3.09294 17.2493 3.26846 17.5529C3.44398 17.8566 3.69626 18.1087 4 18.2841L11 22.2841C11.304 22.4596 11.6489 22.5521 12 22.5521C12.3511 22.5521 12.696 22.4596 13 22.2841L20 18.2841C20.3037 18.1087 20.556 17.8566 20.7315 17.5529C20.9071 17.2493 20.9996 16.9048 21 16.5541Z&#10;M12 22.6342V12.5542" fill="#fd7e14" fillRule="EVEN_ODD" layoutX="33.0" layoutY="2.0" stroke="BLACK" strokeWidth="2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" />
+                  <Label id="mods_text" alignment="CENTER" layoutX="12.0" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.mods" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane id="config" layoutX="9.0" layoutY="403.05" prefHeight="49.0" prefWidth="84.0" visible="false">
+               <children>
+                  <SVGPath id="config_svg" content="M7.65202 3.12034C7.85537 2.20526 8.667 1.5542 9.6044 1.5542H10.3957C11.3331 1.5542 12.1447 2.20526 12.3481 3.12034L12.551 4.03355C13.2121 4.29239 13.8243 4.64887 14.3697 5.08525L15.2639 4.80381C16.1581 4.52238 17.1277 4.89974 17.5964 5.71154L17.9921 6.39684C18.4608 7.20865 18.3028 8.23707 17.612 8.87072L16.9218 9.50381C16.9733 9.84643 17.0001 10.1972 17.0001 10.5542C17.0001 10.9112 16.9733 11.262 16.9218 11.6046L17.612 12.2377C18.3028 12.8713 18.4608 13.8997 17.9921 14.7116L17.5965 15.3968C17.1278 16.2087 16.1581 16.586 15.2639 16.3046L14.3698 16.0231C13.8243 16.4595 13.2121 16.816 12.551 17.0748L12.3481 17.9881C12.1447 18.9031 11.3331 19.5542 10.3957 19.5542H9.6044C8.667 19.5542 7.85537 18.9031 7.65202 17.9881L7.44909 17.0748C6.78796 16.816 6.17579 16.4595 5.63034 16.0231L4.73614 16.3046C3.84199 16.586 2.87234 16.2087 2.40364 15.3968L2.00798 14.7115C1.53928 13.8997 1.69731 12.8713 2.38811 12.2377L3.07833 11.6046C3.02678 11.2619 3.00005 10.9112 3.00005 10.5542C3.00005 10.1972 3.02678 9.84645 3.07833 9.50382L2.38813 8.87072C1.69732 8.23708 1.5393 7.20866 2.008 6.39685L2.40365 5.71155C2.87235 4.89974 3.842 4.52238 4.73616 4.80381L5.63035 5.08526C6.1758 4.64887 6.78796 4.29239 7.44909 4.03355L7.65202 3.12034Z&#10;&#10;M11 10.5542C11 11.1065 10.5523 11.5542 10 11.5542C9.44775 11.5542 9.00003 11.1065 9.00003 10.5542C9.00003 10.0019 9.44775 9.5542 10 9.5542C10.5523 9.5542 11 10.0019 11 10.5542Z" fill="#fd7e14" fillRule="EVEN_ODD" layoutX="33.0" layoutY="2.0" stroke="BLACK" strokeWidth="2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" />
+                  <Label id="config_text" alignment="CENTER" layoutX="12.0" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.config" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <Button id="deauth" layoutX="25.0" layoutY="491.0" mnemonicParsing="false" AnchorPane.bottomAnchor="35.999999999999986" AnchorPane.leftAnchor="41.67" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="500.82">
+               <graphic>
+                  <SVGPath id="deauth_svg" content="M10.5 8.19548L14.9789 12.1767M14.9789 12.1767L10.5 16.1579M14.9789 12.1767L1.54224 12.1767M14.9789 2.32317L17.5729 2.32317C18.6139 2.32317 19.4578 3.16705 19.4578 4.20803L19.4578 19.8095C19.4578 20.8505 18.6139 21.6943 17.5729 21.6943L14.9789 21.6943" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@servermenu.css" />
+      <URL value="@../../styles/global.css" />
+   </stylesheets>
 </AnchorPane>

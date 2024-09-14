@@ -1,49 +1,113 @@
-/*-- Информация о загрузке --*/
-#outputUpdate {
-    -fx-text-fill: -fx-black2C;
-    -fx-font-size: 12px;
+#info{
+    -fx-background-color:#fd7e14;
+    -fx-background-radius:10;
 }
-.anchor-block-information {
-    -fx-padding: 15px 20px 40px 15px;
+
+#home>#home_text{
+    -fx-font-size:14;
+    -fx-font-family: 'Inter 18pt';
+    -fx-text-fill:#fd7e14;
 }
-/*-- Вывод данных --*/
-#update-detail {
-    -fx-background-color: -fx-white;
-    -fx-background-radius: 20px;
-    -fx-effect: -fx-effect-dropshadow;
+#home>#home_svg{
+
+    -fx-fill:#fd7e14;
 }
-#speed {
-    -fx-text-fill: linear-gradient(to right, #7248A7 0%, #2C03A8 100%);
-    -fx-text-align: center;
-    -fx-font-size: 48px;
-    -fx-font-weight: bold;
+#servers2>#servers_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+#servers2>#servers_text{    -fx-font-size:14;
+    -fx-font-family: 'Inter 18pt';
+    -fx-text-fill:#797A7C;}
+    #acc>#acc_svg{    -fx-fill:#797A7C; -fx-stroke:#797A7C;}
+    #acc>#acc_text{    -fx-font-size:14;
+        -fx-font-family: 'Inter 18pt';
+        -fx-text-fill:#797A7C;}
+        #mods>#mods_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+    #mods>#mods_text{    -fx-font-size:14;
+        -fx-font-family: 'Inter 18pt';
+        -fx-text-fill:#797A7C;}
+        #config>#config_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+    #config>#config_text{    -fx-font-size:14;
+        -fx-font-family: 'Inter 18pt';
+        -fx-text-fill:#797A7C;}
+    
+#info_button{
+            -fx-font-family: 'Inter 18pt Medium';
+            -fx-background-color:#fff;
+            -fx-text-fill:#000;
+            -fx-background-radius:10;
+            -fx-alignment:center;
+            -fx-font-size:14;
+        }
+
+#info_tittle{
+    -fx-font-family: 'Inter 18pt SemiBold';
+    -fx-font-size:24;
+    -fx-text-fill:#fff;
 }
-#speed-text {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+#info_under_tittle{
+    -fx-font-family: 'Inter 24pt';
+    -fx-font-size:14;
+    -fx-text-fill:#fff;
 }
-.speedError {
-    -fx-text-fill: -fx-red;
-    -fx-font-size: 48px;
+#server_list{
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size:14;
 }
+#cube{
+    -fx-fill:transparent;
+    -fx-stroke:#fd7e14;
+}
+#download{
+
+    -fx-background-color:#EDEFF2;
+    -fx-background-radius:10;
+}
+#cancel_button{
+    -fx-text-fill:#797A7C;
+    -fx-font-size:14;
+    -fx-font-family: 'Inter 18pt Medium';
+    -fx-background-color:#D6D6D6;
+    -fx-background-radius:10;
+}
+#download_files{
+    -fx-text-fill:#000;
+    -fx-font-size:12;
+    -fx-font-family: 'Inter 18pt';
+
+}
+
+#serverlist{
+    -fx-padding:0;
+    -fx-font-size:11.83;
+    -fx-font-family: 'Inter 18pt';
+    -fx-text-fill:#797A7C;
+    -fx-background-color: transparent;
+}
+
+
+
 /* Прогресс бар */
 ProgressBar {
-    -fx-indeterminate-bar-flip: false;
+    -fx-indeterminate-bar-flip: true;
     -fx-background-color: -fx-whiteG;
-    -fx-background-radius: 0px 10px 10px 0px;
-    -fx-effect: -fx-effect-dropshadow;
+    -fx-background-radius: 10;
+
 }
 ProgressBar>.bar {
     -fx-background-color: -fx-updateGR;
     -fx-background-insets: 0px;
-    -fx-background-radius: 0px 10px 10px 0px;
+    -fx-background-radius: 10;
 }
 ProgressBar>.track {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-background-radius: 0px 10px 10px 0px;
+    -fx-background-radius: 10;
 }
 /* Добавляется при ошибке загрузки */
 .progressError>.bar {
     -fx-background-color: -fx-errorGR;
+}
+#volume{
+    -fx-text-fill:#797A7C;
+    -fx-font-size:11;
+    -fx-font-family: 'Inter 18pt';
 }

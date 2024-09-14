@@ -59,16 +59,16 @@ public abstract class AbstractVisualComponent {
     protected void initBasicControls(Parent header) {
         if (header == null) {
             LogHelper.warning("Scene %s header button(#close, #hide) deprecated", getName());
-            LookupHelper.<ButtonBase>lookupIfPossible(layout, "#close")
+            LookupHelper.<ButtonBase>lookupIfPossible(layout,  "#exit")
                         .ifPresent((b) -> b.setOnAction((e) -> currentStage.close()));
             LookupHelper.<ButtonBase>lookupIfPossible(layout, "#hide")
                         .ifPresent((b) -> b.setOnAction((e) -> currentStage.hide()));
         } else {
-            LookupHelper.<ButtonBase>lookupIfPossible(header, "#controls", "#exit")
+            LookupHelper.<ButtonBase>lookupIfPossible(layout,  "#exit")
                         .ifPresent((b) -> b.setOnAction((e) -> currentStage.close()));
-            LookupHelper.<ButtonBase>lookupIfPossible(header, "#controls", "#minimize")
+            LookupHelper.<ButtonBase>lookupIfPossible(layout, "#hide")
                         .ifPresent((b) -> b.setOnAction((e) -> currentStage.hide()));
-            LookupHelper.<ButtonBase>lookupIfPossible(header, "#controls", "#lang").ifPresent((b) -> {
+            LookupHelper.<ButtonBase>lookupIfPossible(layout,  "#lang").ifPresent((b) -> {
 
                 b.setContextMenu(makeLangContextMenu());
                 b.setOnMousePressed((e) -> {

@@ -1,12 +1,17 @@
 package pro.gravit.launcher.client.gui.scenes.update;
 
+import javafx.animation.ScaleTransition;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import pro.gravit.launcher.client.gui.JavaFXApplication;
 import pro.gravit.launcher.client.gui.helper.LookupHelper;
 import pro.gravit.launcher.client.gui.scenes.AbstractScene;
+import pro.gravit.launcher.client.gui.scenes.servermenu.ServerButton;
+import pro.gravit.launcher.client.gui.scenes.servermenu.ServerMenuScene;
 import pro.gravit.launcher.hasher.FileNameMatcher;
 import pro.gravit.launcher.hasher.HashedDir;
+import pro.gravit.launcher.profiles.ClientProfile;
 import pro.gravit.launcher.profiles.optional.OptionalView;
 import pro.gravit.utils.helper.LogHelper;
 
@@ -17,13 +22,12 @@ import java.util.function.Consumer;
 
 public class UpdateScene extends AbstractScene {
     private ProgressBar progressBar;
-    private Label speed;
+
     private Label volume;
-    private TextArea logOutput;
+
     private Button cancel;
-    private Label speedtext;
-    private Label speederr;
-    private Pane speedon;
+    private Button info_button;
+
 
     private VisualDownloader downloader;
     private volatile DownloadStatus downloadStatus = DownloadStatus.COMPLETE;
@@ -35,21 +39,50 @@ public class UpdateScene extends AbstractScene {
     @Override
     protected void doInit() {
         progressBar = LookupHelper.lookup(layout, "#progress");
-        speed = LookupHelper.lookup(layout, "#speed");
-        speederr = LookupHelper.lookup(layout, "#speedErr");
-        speedon = LookupHelper.lookup(layout, "#speedOn");
-        speedtext = LookupHelper.lookup(layout, "#speed-text");
-        cancel = LookupHelper.lookup(layout, "#cancel");
+        info_button = LookupHelper.lookup(layout, "#info_button");
+
+
+        info_button.setOnMouseEntered((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), info_button);
+            transition.setToX(1.05);
+            transition.setToY(1.05);
+            transition.play();
+        });
+        info_button.setOnMouseExited((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), info_button);
+            transition.setToX(1);
+            transition.setToY(1);
+            transition.play();
+        });
+
+        cancel = LookupHelper.lookup(layout, "#cancel_button");
         volume = LookupHelper.lookup(layout, "#volume");
-        logOutput = LookupHelper.lookup(layout, "#outputUpdate");
-        downloader = new VisualDownloader(application, progressBar, speed, volume, this::errorHandle,
+        cancel.setOnMouseEntered((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), cancel);
+            transition.setToX(1.05);
+            transition.setToY(1.05);
+            transition.play();
+        });
+        cancel.setOnMouseExited((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), cancel);
+            transition.setToX(1);
+            transition.setToY(1);
+            transition.play();
+        });
+
+        downloader = new VisualDownloader(application, progressBar, volume, this::errorHandle,
                                           (log) -> contextHelper.runInFxThread(() -> addLog(log)), this::onUpdateStatus);
-        LookupHelper.<ButtonBase>lookup(layout, "#cancel").setOnAction((e) -> {
+        LookupHelper.<ButtonBase>lookup(layout, "#cancel_button").setOnAction((e) -> {
             if (downloadStatus == DownloadStatus.DOWNLOAD && downloader.isDownload()) {
                 downloader.cancel();
+                try {
+                    switchScene(application.gui.serverMenuScene);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if(downloadStatus == DownloadStatus.ERROR || downloadStatus == DownloadStatus.COMPLETE) {
                 try {
-                    switchScene(application.gui.serverInfoScene);
+                    switchScene(application.gui.serverMenuScene);
                 } catch (Exception exception) {
                     errorHandle(exception);
                 }
@@ -73,19 +106,20 @@ public class UpdateScene extends AbstractScene {
     }
 
     public void addLog(String string) {
-        LogHelper.dev("Update event %s", string);
-        logOutput.appendText(string.concat("\n"));
+
+
     }
 
     @Override
     public void reset() {
         progressBar.progressProperty().setValue(0);
-        logOutput.setText("");
-        volume.setText("");
-        speed.setText("0");
         progressBar.getStyleClass().removeAll("progress");
-        speederr.setVisible(false);
-        speedon.setVisible(true);
+        Pane serverButtonContainer = LookupHelper.lookup(layout, "#serverButton");
+        serverButtonContainer.getChildren().clear();
+        ClientProfile profile = application.profilesService.getProfile();
+        ServerButton serverButton = ServerMenuScene.getServerButton(application, profile);
+        serverButton.addTo(serverButtonContainer);
+
     }
 
     @Override
@@ -95,8 +129,6 @@ public class UpdateScene extends AbstractScene {
         }
         addLog("Exception %s: %s".formatted(e.getClass(), e.getMessage() == null ? "" : e.getMessage()));
         progressBar.getStyleClass().add("progressError");
-        speederr.setVisible(true);
-        speedon.setVisible(false);
         LogHelper.error(e);
     }
 

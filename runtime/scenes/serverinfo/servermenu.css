@@ -2,17 +2,18 @@
     -fx-background-color:#fd7e14;
     -fx-background-radius:10;
 }
-#serverlist{
-    -fx-padding:0;
-    -fx-font-size:11.83;
-    -fx-font-family: 'Inter 18pt';
-    -fx-text-fill:#797A7C;
-    -fx-background-color: transparent;
+#home,#mods,#acc,#config{
+    -fx-cursor:hand;
 }
-#home>#home_text{-fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#fd7e14;}
-#home>#home_svg{-fx-fill:#fd7e14;}
-#servers2>#servers_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
-#servers2>#servers_text{    -fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+
+#servers2{
+    -fx-cursor:default;
+}
+
+#home>#home_text{-fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#home>#home_svg{-fx-fill:#797A7C;}
+#servers2>#servers_svg{    -fx-fill:transparent; -fx-stroke:#fd7e14;}
+#servers2>#servers_text{    -fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#fd7e14;}
 #acc>#acc_svg{    -fx-fill:#797A7C; -fx-stroke:#797A7C;}
 #acc>#acc_text{    -fx-font-size:14; -fx-font-family: 'Inter 18pt'; -fx-text-fill:#797A7C;}
 #mods>#mods_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
@@ -44,8 +45,8 @@
     -fx-font-size:14;
 }
 #cube{
-    -fx-fill:transparent;
-    -fx-stroke:#fd7e14;
+    -fx-fill:#fd7e14;
+    -fx-stroke:#FFFFFF;
 }
 #download{
     

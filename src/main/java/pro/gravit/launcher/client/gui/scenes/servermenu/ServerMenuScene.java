@@ -1,14 +1,21 @@
 package pro.gravit.launcher.client.gui.scenes.servermenu;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import pro.gravit.launcher.client.ServerPinger;
 import pro.gravit.launcher.client.gui.JavaFXApplication;
 import pro.gravit.launcher.client.gui.config.DesignConstants;
@@ -26,8 +33,9 @@ import java.util.*;
 
 public class ServerMenuScene extends AbstractScene {
     private List<ClientProfile> lastProfiles;
-    private ImageView avatar;
-    private Image originalAvatarImage;
+    private Button downlaod_button;
+    private Button info_button;
+
 
     public ServerMenuScene(JavaFXApplication application) {
         super("scenes/servermenu/servermenu.fxml", application);
@@ -35,18 +43,83 @@ public class ServerMenuScene extends AbstractScene {
 
     @Override
     public void doInit() {
-        /** -- UserBlock START -- */
-        avatar = LookupHelper.lookup(layout, "#avatar");
-        originalAvatarImage = avatar.getImage();
-        LookupHelper.<ImageView>lookupIfPossible(layout, "#avatar").ifPresent((h) -> {
+
+
+        LookupHelper.lookup(layout,  "#mods").setOnMouseClicked((e) -> {
             try {
-                JavaFxUtils.setStaticRadius(h, DesignConstants.AVATAR_IMAGE_RADIUS);
-                h.setImage(originalAvatarImage);
-            } catch (Throwable e) {
-                LogHelper.warning("Skin head error");
+                if (application.profilesService.getProfile() == null) return;
+                switchScene(application.gui.optionsScene);
+                application.gui.optionsScene.reset();
+            } catch (Exception ex) {
+                errorHandle(ex);
             }
         });
-        /** -- UserBlock END -- */
+        LookupHelper.lookup(layout,  "#config").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.settingsScene);
+                application.gui.settingsScene.reset();
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+        LookupHelper.lookup(layout,  "#serverlist").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.serverInfoScene);
+
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+        LookupHelper.lookup(layout,  "#servers2").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.serverInfoScene);
+
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+
+
+        ClientProfile profile = application.profilesService.getProfile();
+        LookupHelper.<Button>lookup(layout, "#download_button").setOnMouseClicked((e) -> {
+            try {
+
+                runClient();
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+    downlaod_button = LookupHelper.lookup(layout,"#download_button");
+        info_button = LookupHelper.lookup(layout,"#info_button");
+
+        downlaod_button.setOnMouseEntered((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), downlaod_button);
+            transition.setToX(1.05);
+            transition.setToY(1.05);
+            transition.play();
+        });
+        downlaod_button.setOnMouseExited((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), downlaod_button);
+            transition.setToX(1);
+            transition.setToY(1);
+            transition.play();
+        });
+
+        info_button.setOnMouseEntered((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), info_button);
+            transition.setToX(1.05);
+            transition.setToY(1.05);
+            transition.play();
+        });
+        info_button.setOnMouseExited((event) -> {
+            ScaleTransition transition = new ScaleTransition(Duration.seconds(0.1), info_button);
+            transition.setToX(1);
+            transition.setToY(1);
+            transition.play();
+        });
+
+
+
         ScrollPane scrollPane = LookupHelper.lookup(layout, "#servers");
         scrollPane.setOnScroll(e -> {
             double widthContent = scrollPane.getWidth();
@@ -54,10 +127,10 @@ public class ServerMenuScene extends AbstractScene {
             scrollPane.setHvalue(scrollPane.getHvalue() - offset);
         });
         reset();
-        isResetOnShow = true;
+
     }
 
-    static class ServerButtonCache {
+    public static class ServerButtonCache {
         public ServerButton serverButton;
         public int position;
     }
@@ -83,24 +156,29 @@ public class ServerMenuScene extends AbstractScene {
             position++;
         }
         ScrollPane scrollPane = LookupHelper.lookup(layout, "#servers");
-        HBox serverList = (HBox) scrollPane.getContent();
-        serverList.setSpacing(20);
+        FlowPane serverList = (FlowPane) scrollPane.getContent();
+        serverList.setHgap(20);
         serverList.getChildren().clear();
         application.pingService.clear();
+
         serverButtonCacheMap.forEach((profile, serverButtonCache) -> {
             EventHandler<? super MouseEvent> handle = (event) -> {
+
                 if (!event.getButton().equals(MouseButton.PRIMARY)) return;
-                changeServer(profile);
-                try {
-                    switchScene(application.gui.serverInfoScene);
-                    application.gui.serverInfoScene.reset();
-                } catch (Exception e) {
-                    errorHandle(e);
-                }
+                LookupHelper.<Button>lookup(layout, "#download_button").setDisable(false);
+                LookupHelper.<Label>lookup(layout,"#server_tap").setText(application.getTranslation("runtime.scenes.servermenu.selected_server")+" "+profile.getTitle());
+                LookupHelper.lookup(layout,"#mods").setVisible(true);
+                LookupHelper.lookup(layout,"#config").setVisible(true);
+
+changeServer(profile);
             };
+
+
+
             serverButtonCache.serverButton.addTo(serverList, serverButtonCache.position);
             serverButtonCache.serverButton.setOnMouseClicked(handle);
         });
+
         CommonHelper.newThread("ServerPinger", true, () -> {
             for (ClientProfile profile : lastProfiles) {
                 for (ClientProfile.ServerProfile serverProfile : profile.getServers()) {
@@ -115,35 +193,39 @@ public class ServerMenuScene extends AbstractScene {
                 }
             }
         }).start();
-        /** -- UserBlock START -- */
-        LookupHelper.<Label>lookupIfPossible(layout, "#nickname")
-                    .ifPresent((e) -> e.setText(application.authService.getUsername()));
-        LookupHelper.<Label>lookupIfPossible(layout, "#role")
-                    .ifPresent((e) -> e.setText(application.authService.getMainRole()));
-        avatar.setImage(originalAvatarImage);
-        resetAvatar();
-        if(application.authService.isFeatureAvailable(GetAssetUploadUrlRequestEvent.FEATURE_NAME)) {
-            LookupHelper.<Button>lookupIfPossible(layout, "#customization").ifPresent((h) -> {
-                h.setVisible(true);
-                h.setOnAction((a) -> {
-                    processRequest(application.getTranslation("runtime.overlay.processing.text.uploadassetinfo"), new AssetUploadInfoRequest(), (info) -> {
-                        contextHelper.runInFxThread(() -> {
-                            showOverlay(application.gui.uploadAssetOverlay, (f) -> {
-                                application.gui.uploadAssetOverlay.onAssetUploadInfo(info);
-                            });
-                        });
-                    }, this::errorHandle, (e) -> {});
-                });
-            });
-        }
-        /** -- UserBlock END -- */
+
+
     }
 
-    public void resetAvatar() {
-        if (avatar == null) {
-            return;
-        }
-        JavaFxUtils.putAvatarToImageView(application, application.authService.getUsername(), avatar);
+    private void runClient() {
+        application.launchService.launchClient().thenAccept((clientInstance -> {
+            if(clientInstance.getSettings().debug) {
+                contextHelper.runInFxThread(() -> {
+                    try {
+                        switchScene(application.gui.debugScene);
+                        application.gui.debugScene.onClientInstance(clientInstance);
+                    } catch (Exception ex) {
+                        errorHandle(ex);
+                    }
+                });
+            } else {
+                clientInstance.start();
+                clientInstance.getOnWriteParamsFuture().thenAccept((ok) -> {
+                    LogHelper.info("Params write successful. Exit...");
+                    Platform.exit();
+                }).exceptionally((ex) -> {
+                    contextHelper.runInFxThread(() -> {
+                        errorHandle(ex);
+                    });
+                    return null;
+                });
+            }
+        })).exceptionally((ex) -> {
+            contextHelper.runInFxThread(() -> {
+                errorHandle(ex);
+            });
+            return null;
+        });
     }
 
     @Override

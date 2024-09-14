@@ -2,3 +2,33 @@
     -fx-text-fill: -fx-grayD;
     -fx-font-size: 8pt;
 }
+#output{
+    -fx-text-fill:#000;
+    -fx-background-color: transparent;
+}
+#output-detail{
+    -fx-background-color: #EDEFF2;
+}
+#tittle{
+    -fx-font-family: 'Inter 18pt Medium';
+    -fx-font-size:18;
+}
+#home>#home_text{-fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#home>#home_svg{-fx-fill:#797A7C;}
+#servers2>#servers_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+#servers2>#servers_text{    -fx-font-size:14;
+    -fx-font-family: 'Inter 18pt';
+    -fx-text-fill:#797A7C;}
+    #acc>#acc_svg{    -fx-fill:#797A7C; -fx-stroke:#797A7C;}
+    #acc>#acc_text{    -fx-font-size:14;
+        -fx-font-family: 'Inter 18pt';
+        -fx-text-fill:#797A7C;}
+        #mods>#mods_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+    #mods>#mods_text{    -fx-font-size:14;
+        -fx-font-family: 'Inter 18pt';
+        -fx-text-fill:#797A7C;}
+        #config>#config_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+    #config>#config_text{    -fx-font-size:14;
+        -fx-font-family: 'Inter 18pt';
+        -fx-text-fill:#797A7C;}
+    

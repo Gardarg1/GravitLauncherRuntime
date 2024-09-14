@@ -128,10 +128,7 @@ public class UploadAssetOverlay extends CenterOverlay {
                                                         URL skinUrl = new URL(texture.url);
                                                         if("SKIN".equals(name)) {
                                                             application.skinManager.addOrReplaceSkin(application.authService.getUsername(), skinUrl);
-                                                            application.gui.serverMenuScene.resetAvatar();
-                                                            application.gui.serverInfoScene.resetAvatar();
-                                                            application.gui.settingsScene.resetAvatar();
-                                                            application.gui.optionsScene.resetAvatar();
+
                                                         }
                                                         contextHelper.runInFxThread(() -> {
                                                             application.messageManager.createNotification(application.getTranslation("runtime.overlay.uploadasset.success.header"), application.getTranslation("runtime.overlay.uploadasset.success.description"));

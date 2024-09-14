@@ -1,80 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane fx:id="layout" prefHeight="560.0" prefWidth="930.0" styleClass="background" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <AnchorPane id="header" prefHeight="80.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Label maxWidth="400.0" prefHeight="32.0" styleClass="scene-header" text="%runtime.scenes.settings.header" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="34.0" />
-        <HBox id="controls" spacing="10.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="34.0">
-            <fx:include source="../../components/buttons/console.fxml" />
-            <fx:include source="../../components/buttons/lang.fxml" />
-            <fx:include source="../../components/buttons/minimize.fxml" />
-            <fx:include source="../../components/buttons/exit.fxml" />
-        </HBox>
-    </AnchorPane>
-    <fx:include source="../../components/panels/leftpanel.fxml" />
-    <AnchorPane prefHeight="480.0" prefWidth="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+<AnchorPane fx:id="layout" minHeight="560.0" minWidth="930.0" prefHeight="560.0" prefWidth="930.0" styleClass="background" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane id="background_settingslist" prefHeight="483.38" prefWidth="790.39" AnchorPane.bottomAnchor="11.72" AnchorPane.leftAnchor="120.46" AnchorPane.rightAnchor="19.15" AnchorPane.topAnchor="64.9">
         <children>
-            <ScrollPane id="settingslist" fitToWidth="true" hbarPolicy="NEVER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
-                <VBox spacing="15.0">
+            <ScrollPane id="settingslist" hbarPolicy="NEVER">
+                <VBox fillWidth="false">
                     <children>
                         <VBox>
                             <children>
                                 <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308">
                                     <children>
-                                        <Label styleClass="settings-header" text="%runtime.scenes.settings.header.ram" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                        <Label id="ramLabel" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0" />
+                                        <Label id="settings-header2" text="%runtime.scenes.settings.header.ram_text" AnchorPane.bottomAnchor="52.82" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="471.85" AnchorPane.topAnchor="21.78" />
+                                        <Label id="ramLabel" alignment="CENTER_RIGHT" layoutX="545.0" layoutY="41.0" text="%runtime.scenes.settings.ram" AnchorPane.bottomAnchor="46.94" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.78" />
+                              <ProgressBar id="ramBar" layoutX="8.0" layoutY="55.2" prefHeight="10.0" prefWidth="734.0" progress="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="55.0" />
+                                      <Slider id="ramSlider" layoutX="4.0" layoutY="52.8" maxWidth="740.0" minWidth="589.0" prefHeight="34.0" prefWidth="738.0" showTickLabels="true" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="53.0" />
+                              <Label id="settings-header-top" text="%runtime.scenes.settings.header.ram" />
                                     </children>
                                 </AnchorPane>
-                                <Slider id="ramSlider" prefHeight="17.0" prefWidth="589.0">
-                                    <VBox.margin>
-                                        <Insets top="5.0" />
-                                    </VBox.margin>
-                                </Slider>
                             </children>
+                     <padding>
+                        <Insets left="25.6" top="21.32" />
+                     </padding>
                         </VBox>
-                        <VBox id="settings-list" styleClass="settings-card">
-                            <children>
-                                <Label styleClass="settings-header" text="%runtime.scenes.settings.header.options" />
-                                <HBox layoutX="10.0" layoutY="10.0" styleClass="settings-container">
-                                    <children>
-                                        <CheckBox styleClass="settings-checkbox" />
-                                        <VBox>
-                                            <children>
-                                                <Label styleClass="settings-label-header" text="Имя" wrapText="true" />
-                                                <Label styleClass="settings-label" text="Описание" wrapText="true" />
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-                            </children>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
+                  <HBox prefHeight="0.0" prefWidth="670.83" spacing="44.88">
+                     <children>
+                              <VBox id="settings-list" prefHeight="157.62" spacing="6.6" styleClass="settings-card">
+                                  <children>
+                                      <Label id="option_text" styleClass="settings-header" text="Опції" />
+                                      <HBox layoutX="10.0" layoutY="10.0" styleClass="settings-container">
+                                          <children>
+                                              <CheckBox prefWidth="33.0" selected="true" styleClass="settings-checkbox" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                              <VBox>
+                                                  <children>
+                                                      <Label styleClass="settings-label-header" text="Имя" wrapText="true" />
+                                                      <Label styleClass="settings-label" text="Описание" wrapText="true" />
+                                                  </children>
+                                              </VBox>
+                                          </children>
+                                 <VBox.margin>
+                                    <Insets top="11.36" />
+                                 </VBox.margin>
+                                      </HBox>
+                                  </children>
+                              </VBox>
+                        <VBox prefHeight="37.0" prefWidth="241.0">
+                           <children>
+                              <Label id="java_text" text="Мова ( Launguage )" />
+                              <Label id="java_text_label" maxHeight="1.7976931348623157E308" text="Змінює мову інтерфейсу лаунчера.&#10;" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ComboBox id="languageCombo" prefHeight="33.0" prefWidth="125.0" promptText="Українська" />
+                           </children>
                         </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="21.71" top="15.01" />
+                     </VBox.margin>
+                  </HBox>
                         <VBox>
                             <children>
-                                <Label styleClass="settings-header" text="%runtime.scenes.settings.header.java" />
+                                <Label id="java_text" text="JAVA" />
                                 <HBox prefHeight="40.0" spacing="10.0">
                                     <children>
-                                        <ComboBox id="javaCombo" maxHeight="1.7976931348623157E308" minWidth="296.0">
-                                            <tooltip>
-                                                <Tooltip anchorLocation="WINDOW_BOTTOM_LEFT" text="Empty Tooltip" />
-                                            </tooltip>
-                                        </ComboBox>
-                                        <Label maxHeight="1.7976931348623157E308" text="%runtime.scenes.settings.javaDesc" wrapText="true" />
+                              <ComboBox id="javaCombo" prefHeight="40.0" prefWidth="195.0" promptText="23" />
+                                        <Label id="java_text_label" maxHeight="1.7976931348623157E308" text="%runtime.scenes.settings.javaDesc" wrapText="true" />
                                     </children>
                                     <opaqueInsets>
                                         <Insets />
@@ -84,29 +98,37 @@
                                     </VBox.margin>
                                 </HBox>
                             </children>
+                     <padding>
+                        <Insets left="24.12" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="15.67" />
+                     </VBox.margin>
                         </VBox>
                         <VBox styleClass="settings-card">
                             <children>
-                                <Label styleClass="settings-header" text="%runtime.scenes.settings.header.changeDirectory" />
+                                <Label id="change_dir_header" text="%runtime.scenes.settings.dirText" />
                                 <!-- Папка проекта-->
-                                <HBox id="folder" alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="624.0">
+                                <HBox id="folder" alignment="CENTER_LEFT" prefHeight="37.4" prefWidth="339.01">
                                     <!-- Путь к папкам-->
-                                    <Hyperlink id="path" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="C:\Users" HBox.hgrow="ALWAYS">
-                                        <tooltip>
-                                            <Tooltip anchorLocation="WINDOW_BOTTOM_LEFT" text="Empty Tooltip" />
-                                        </tooltip>
-                                    </Hyperlink>
+                                    <Hyperlink id="path" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="C:\Users" HBox.hgrow="ALWAYS" />
                                     <!-- Смена пути-->
-                                    <Button id="changeDir" alignment="BASELINE_CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" minWidth="215.0" styleClass="icon-button" text="%runtime.scenes.settings.dirText">
-                                        <graphic>
-                                            <SVGPath content="M12 6.3999H6.4H5V7.7999V16.1999V17.5999H19V16.1999L19 9.1999V7.7999H17.6H12V6.3999ZM10.6 9.1999H17.6V16.1999H6.4V7.7999H10.6V9.1999ZM14.7998 11.9999H13.4V10.5999H12V11.9999H13.3998V13.3999H14.7998V11.9999ZM14.7998 11.9999H16.1998V10.5999H14.7998L14.7998 11.9999ZM16.1998 13.3999H14.7998V14.7999H16.1998V13.3999ZM13.4 13.3999H12V14.7999H13.4V13.3999Z" styleClass="icon-button-color" />
-                                        </graphic>
-                                        <tooltip>
-                                            <Tooltip anchorLocation="WINDOW_BOTTOM_LEFT" text="%runtime.scenes.settings.changedirTooltip" />
-                                        </tooltip>
+                                    <Button id="changeDir" alignment="BASELINE_CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" minHeight="37.4" minWidth="37.4" prefHeight="37.4" prefWidth="37.4" styleClass="icon-button">
+                              <HBox.margin>
+                                 <Insets left="2.42" />
+                              </HBox.margin>
+                              <graphic>
+                                 <SVGPath id="changeDir_svg" content="M4.25871 0.902832H1.84584C1.17954 0.902832 0.639404 1.44297 0.639404 2.10926V9.34787C0.639404 10.0142 1.17954 10.5543 1.84584 10.5543H9.08445C9.75074 10.5543 10.2909 10.0142 10.2909 9.34787V6.93501M4.86193 6.33179L10.2909 0.902832M10.2909 0.902832V3.91892M10.2909 0.902832H7.27479" />
+                              </graphic>
                                     </Button>
+                           <VBox.margin>
+                              <Insets top="7.13" />
+                           </VBox.margin>
                                 </HBox>
                             </children>
+                     <VBox.margin>
+                        <Insets left="24.13" top="37.3" />
+                     </VBox.margin>
                         </VBox>
                     </children>
                 </VBox>
@@ -114,6 +136,75 @@
                     <Insets />
                 </opaqueInsets>
             </ScrollPane>
+         <Button id="save" layoutX="684.0" layoutY="436.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="144.0" text="%runtime.global.text.Apply" AnchorPane.leftAnchor="623.54" AnchorPane.topAnchor="420.1" />
         </children>
     </AnchorPane>
+   <SVGPath id="cube" content="M6.98405 2.56614C7.1874 1.65106 7.99903 1 8.93643 1H9.72774C10.6651 1 11.4768 1.65106 11.6801 2.56614L11.8831 3.47935C12.5442 3.73819 13.1563 4.09467 13.7018 4.53105L14.596 4.24961C15.4901 3.96818 16.4598 4.34554 16.9285 5.15735L17.3241 5.84264C17.7928 6.65445 17.6348 7.68287 16.944 8.31652L16.2538 8.94961C16.3054 9.29223 16.3321 9.643 16.3321 10C16.3321 10.357 16.3054 10.7078 16.2538 11.0504L16.944 11.6835C17.6348 12.3171 17.7928 13.3455 17.3241 14.1574L16.9285 14.8426C16.4598 15.6545 15.4901 16.0318 14.596 15.7504L13.7018 15.4689C13.1563 15.9053 12.5442 16.2618 11.8831 16.5206L11.6801 17.4339C11.4768 18.3489 10.6651 19 9.72774 19H8.93643C7.99903 19 7.1874 18.3489 6.98405 17.4339L6.78112 16.5206C6.11999 16.2618 5.50782 15.9053 4.96237 15.4689L4.06817 15.7504C3.17402 16.0318 2.20437 15.6545 1.73567 14.8426L1.34001 14.1573C0.871315 13.3455 1.02934 12.3171 1.72014 11.6835L2.41036 11.0504C2.35881 10.7077 2.33208 10.357 2.33208 10C2.33208 9.643 2.35881 9.29225 2.41037 8.94962L1.72016 8.31652C1.02935 7.68288 0.871329 6.65446 1.34003 5.84265L1.73568 5.15735C2.20438 4.34554 3.17403 3.96818 4.06819 4.24962L4.96238 4.53106C5.50783 4.09467 6.11999 3.73819 6.78112 3.47935L6.98405 2.56614Z&#10;M10.3321 10C10.3321 10.5523 9.88435 11 9.33206 11C8.77978 11 8.33206 10.5523 8.33206 10C8.33206 9.44772 8.77978 9 9.33206 9C9.88435 9 10.3321 9.44772 10.3321 10Z" layoutX="121.0" layoutY="14.0" stroke="BLACK" strokeWidth="2.0" AnchorPane.bottomAnchor="520.0" AnchorPane.leftAnchor="123.66" AnchorPane.topAnchor="22.0" />
+   <Label id="tittle" layoutX="200.0" layoutY="26.0" text="%runtime.scenes.settings.header" AnchorPane.bottomAnchor="520.5" AnchorPane.leftAnchor="149.46" AnchorPane.topAnchor="22.5" />
+   <Button id="exit" alignment="CENTER" layoutX="914.0" layoutY="30.03" maxHeight="16.22" maxWidth="16.22" minHeight="16.22" minWidth="16.22" mnemonicParsing="false" prefHeight="16.22" prefWidth="16.22" AnchorPane.bottomAnchor="520.5" AnchorPane.leftAnchor="887.91" AnchorPane.rightAnchor="19.15" AnchorPane.topAnchor="16.56" />
+   <Button id="hide" layoutX="873.56" layoutY="31.0" minHeight="1.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="10.0" AnchorPane.bottomAnchor="531.47" AnchorPane.leftAnchor="869.04" AnchorPane.rightAnchor="50.96" AnchorPane.topAnchor="27.53">
+      <graphic>
+         <Line endX="10.0" stroke="#797a7c" strokeWidth="2.0" />
+      </graphic>
+   </Button>
+   <AnchorPane id="header" prefHeight="80.0">
+      <children>
+         <ImageView layoutX="28.0" layoutY="25.0" AnchorPane.bottomAnchor="495.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.48" AnchorPane.topAnchor="25.0">
+            <image>
+               <Image url="@../../images/icons/logo.png" />
+            </image>
+         </ImageView>
+         <AnchorPane id="home" layoutX="23.0" layoutY="89.0" prefHeight="49.0" prefWidth="56.0">
+            <children>
+               <SVGPath id="home_svg" content="M16.0167 5.64177C16.6261 6.00149 17 6.65646 17 7.3641V16.5C17 17.6046 16.1046 18.5 15 18.5H13C11.8954 18.5 11 17.6046 11 16.5V12.4999C11 11.3954 10.1046 10.4999 9 10.4999C7.89543 10.4999 7 11.3954 7 12.4999V16.5C7 17.6046 6.10457 18.5 5 18.5H3C1.89543 18.5 1 17.6046 1 16.5V7.3641C1 6.65646 1.37395 6.00149 1.98335 5.64177L7.98335 2.10011C8.61056 1.72988 9.38944 1.72988 10.0167 2.10011L16.0167 5.64177Z" fill="#fd7e14" layoutX="20.0" layoutY="3.0" />
+               <Label id="home_text" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.home" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" />
+            </children>
+         </AnchorPane>
+         <AnchorPane id="servers2" layoutX="21.0" layoutY="168.0" prefHeight="49.0" prefWidth="56.0">
+            <children>
+               <SVGPath id="servers_svg" content="M1.08203 6.76986V3.09418C1.08203 2.07917 1.90486 1.25635 2.91987 1.25635H19.0775C20.0925 1.25635 20.9154 2.07918 20.9154 3.09419V6.76986M1.08203 6.76986H20.9154M1.08203 6.76986V12.2834M20.9154 6.76986V12.2834M20.9154 12.2834V15.9591C20.9154 16.9741 20.0925 17.7969 19.0775 17.7969H2.91987C1.90486 17.7969 1.08203 16.9741 1.08203 15.959V12.2834M20.9154 12.2834H1.08203M5.33203 9.52662H5.3462M5.33203 4.0131H5.3462M5.33203 15.0401H5.3462" fill="WHITE" fillRule="EVEN_ODD" layoutX="20.08" layoutY="2.76" stroke="BLACK" strokeWidth="1.84" />
+               <Label id="servers_text" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.servers" />
+            </children>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </AnchorPane>
+         <AnchorPane id="acc" layoutX="23.5" layoutY="245.05" prefHeight="49.0" prefWidth="56.0">
+            <children>
+               <SVGPath id="acc_svg" content="M15.71 13.2643C16.6904 12.493 17.406 11.4352 17.7572 10.2383C18.1085 9.04129 18.0779 7.76459 17.6698 6.58579C17.2617 5.40699 16.4963 4.38472 15.4801 3.66118C14.4639 2.93764 13.2474 2.54883 12 2.54883C10.7525 2.54883 9.53611 2.93764 8.51993 3.66118C7.50374 4.38472 6.73834 5.40699 6.33021 6.58579C5.92208 7.76459 5.89151 9.04129 6.24276 10.2383C6.59401 11.4352 7.3096 12.493 8.29 13.2643C6.61007 13.9374 5.14428 15.0537 4.04889 16.4942C2.95349 17.9348 2.26956 19.6456 2.07 21.4443C2.05555 21.5756 2.06711 21.7085 2.10402 21.8354C2.14093 21.9622 2.20246 22.0806 2.28511 22.1836C2.45202 22.3918 2.69478 22.5252 2.96 22.5543C3.22521 22.5835 3.49116 22.5061 3.69932 22.3392C3.90749 22.1723 4.04082 21.9295 4.07 21.6643C4.28958 19.7095 5.22168 17.9041 6.68822 16.5931C8.15475 15.2821 10.0529 14.5574 12.02 14.5574C13.9871 14.5574 15.8852 15.2821 17.3518 16.5931C18.8183 17.9041 19.7504 19.7095 19.97 21.6643C19.9972 21.91 20.1144 22.137 20.2991 22.3013C20.4838 22.4657 20.7228 22.5558 20.97 22.5543H21.08C21.3421 22.5242 21.5817 22.3916 21.7466 22.1856C21.9114 21.9795 21.9881 21.7167 21.96 21.4543C21.7595 19.6505 21.0719 17.9353 19.9708 16.4925C18.8698 15.0497 17.3969 13.9338 15.71 13.2643ZM12 12.5543C11.2089 12.5543 10.4355 12.3197 9.77772 11.8802C9.11992 11.4407 8.60723 10.816 8.30448 10.0851C8.00173 9.35415 7.92251 8.54989 8.07686 7.77396C8.2312 6.99804 8.61216 6.28531 9.17157 5.7259C9.73098 5.16649 10.4437 4.78552 11.2196 4.63118C11.9956 4.47684 12.7998 4.55606 13.5307 4.85881C14.2616 5.16156 14.8863 5.67425 15.3259 6.33204C15.7654 6.98984 16 7.7632 16 8.55432C16 9.61519 15.5786 10.6326 14.8284 11.3828C14.0783 12.1329 13.0609 12.5543 12 12.5543Z" fill="#fd7e14" fillRule="EVEN_ODD" layoutX="17.56" layoutY="1.99" stroke="BLACK" AnchorPane.leftAnchor="17.56" AnchorPane.rightAnchor="17.53" />
+               <Label id="acc_text" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.account" AnchorPane.leftAnchor="-2.5" AnchorPane.rightAnchor="-2.5" />
+            </children>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </AnchorPane>
+         <AnchorPane id="mods" layoutX="9.0" layoutY="324.05" prefHeight="49.0" prefWidth="84.0">
+            <children>
+               <SVGPath id="mods_svg" content="M16.5 9.95416L7.5 4.76416&#10;M3.27002 7.51416L12 12.5642L20.73 7.51416&#10;M21 16.5541V8.5541C20.9996 8.20338 20.9071 7.85891 20.7315 7.55526C20.556 7.25162 20.3037 6.99946 20 6.8241L13 2.8241C12.696 2.64856 12.3511 2.55615 12 2.55615C11.6489 2.55615 11.304 2.64856 11 2.8241L4 6.8241C3.69626 6.99946 3.44398 7.25162 3.26846 7.55526C3.09294 7.85891 3.00036 8.20338 3 8.5541V16.5541C3.00036 16.9048 3.09294 17.2493 3.26846 17.5529C3.44398 17.8566 3.69626 18.1087 4 18.2841L11 22.2841C11.304 22.4596 11.6489 22.5521 12 22.5521C12.3511 22.5521 12.696 22.4596 13 22.2841L20 18.2841C20.3037 18.1087 20.556 17.8566 20.7315 17.5529C20.9071 17.2493 20.9996 16.9048 21 16.5541Z&#10;M12 22.6342V12.5542" fill="#fd7e14" fillRule="EVEN_ODD" layoutX="33.0" layoutY="2.0" stroke="BLACK" strokeWidth="2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" />
+               <Label id="mods_text" alignment="CENTER" layoutX="12.0" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.mods" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" />
+            </children>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </AnchorPane>
+         <AnchorPane id="config" layoutX="9.0" layoutY="403.05" prefHeight="49.0" prefWidth="84.0">
+            <children>
+               <SVGPath id="config_svg" content="M7.65202 3.12034C7.85537 2.20526 8.667 1.5542 9.6044 1.5542H10.3957C11.3331 1.5542 12.1447 2.20526 12.3481 3.12034L12.551 4.03355C13.2121 4.29239 13.8243 4.64887 14.3697 5.08525L15.2639 4.80381C16.1581 4.52238 17.1277 4.89974 17.5964 5.71154L17.9921 6.39684C18.4608 7.20865 18.3028 8.23707 17.612 8.87072L16.9218 9.50381C16.9733 9.84643 17.0001 10.1972 17.0001 10.5542C17.0001 10.9112 16.9733 11.262 16.9218 11.6046L17.612 12.2377C18.3028 12.8713 18.4608 13.8997 17.9921 14.7116L17.5965 15.3968C17.1278 16.2087 16.1581 16.586 15.2639 16.3046L14.3698 16.0231C13.8243 16.4595 13.2121 16.816 12.551 17.0748L12.3481 17.9881C12.1447 18.9031 11.3331 19.5542 10.3957 19.5542H9.6044C8.667 19.5542 7.85537 18.9031 7.65202 17.9881L7.44909 17.0748C6.78796 16.816 6.17579 16.4595 5.63034 16.0231L4.73614 16.3046C3.84199 16.586 2.87234 16.2087 2.40364 15.3968L2.00798 14.7115C1.53928 13.8997 1.69731 12.8713 2.38811 12.2377L3.07833 11.6046C3.02678 11.2619 3.00005 10.9112 3.00005 10.5542C3.00005 10.1972 3.02678 9.84645 3.07833 9.50382L2.38813 8.87072C1.69732 8.23708 1.5393 7.20866 2.008 6.39685L2.40365 5.71155C2.87235 4.89974 3.842 4.52238 4.73616 4.80381L5.63035 5.08526C6.1758 4.64887 6.78796 4.29239 7.44909 4.03355L7.65202 3.12034Z&#10;&#10;M11 10.5542C11 11.1065 10.5523 11.5542 10 11.5542C9.44775 11.5542 9.00003 11.1065 9.00003 10.5542C9.00003 10.0019 9.44775 9.5542 10 9.5542C10.5523 9.5542 11 10.0019 11 10.5542Z" fill="#fd7e14" fillRule="EVEN_ODD" layoutX="33.0" layoutY="2.0" stroke="BLACK" strokeWidth="2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" />
+               <Label id="config_text" alignment="CENTER" layoutX="12.0" layoutY="29.0" prefHeight="20.0" prefWidth="60.0" text="%runtime.scenes.servermenu.config" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" />
+            </children>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </AnchorPane>
+         <Button id="deauth" layoutX="25.0" layoutY="491.0" mnemonicParsing="false" AnchorPane.bottomAnchor="35.999999999999986" AnchorPane.leftAnchor="41.67" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="500.82">
+            <graphic>
+               <SVGPath id="deauth_svg" content="M10.5 8.19548L14.9789 12.1767M14.9789 12.1767L10.5 16.1579M14.9789 12.1767L1.54224 12.1767M14.9789 2.32317L17.5729 2.32317C18.6139 2.32317 19.4578 3.16705 19.4578 4.20803L19.4578 19.8095C19.4578 20.8505 18.6139 21.6943 17.5729 21.6943L14.9789 21.6943" />
+            </graphic>
+         </Button>
+      </children>
+   </AnchorPane>
+   <stylesheets>
+      <URL value="@settings.css" />
+      <URL value="@../../styles/global.css" />
+   </stylesheets>
 </AnchorPane>

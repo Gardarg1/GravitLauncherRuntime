@@ -68,7 +68,7 @@ public abstract class AbstractScene extends AbstractVisualComponent {
 
     protected void sceneBaseInit() {
         initBasicControls(header);
-        LookupHelper.<ButtonBase>lookupIfPossible(header, "#controls", "#deauth").ifPresent(b -> b.setOnAction(
+        LookupHelper.<ButtonBase>lookupIfPossible(layout,  "#deauth").ifPresent(b -> b.setOnAction(
                 (e) -> application.messageManager.showApplyDialog(
                         application.getTranslation("runtime.scenes.settings.exitDialog.header"),
                         application.getTranslation("runtime.scenes.settings.exitDialog.description"),

@@ -1,25 +1,25 @@
 @import "./variables.css";
 /*-- Подключение шрифтов --*/
 @font-face {
-    -fx-font-family: 'Comfortaa';
-    src: url('./Comfortaa-Regular.ttf');
+    -fx-font-family: 'Inter 18pt Medium';
+    src: url('./Inter_18pt-Medium.ttf');
 }
 @font-face {
-    -fx-font-family: 'Comfortaa Bold';
-    src: url('./Comfortaa-Bold.ttf');
+    -fx-font-family: 'Inter 18pt';
+    src: url('./Inter_18pt-Regular.ttf');
 }
 @font-face {
-    -fx-font-family: 'Comfortaa Light';
-    src: url('./Comfortaa-Light.ttf');
+    -fx-font-family: 'Inter 24pt SemiBold';
+
+    src: url('./Inter_24pt-SemiBold.ttf');
 }
+
 @font-face {
-    -fx-font-family: 'Comfortaa SemiBold';
-    src: url('./Comfortaa-SemiBold.ttf');
+    -fx-font-family: 'Mazzard M Medium';
+    src: url('./MazzardM-Medium.ttf');
 }
-@font-face {
-    -fx-font-family: 'Comfortaa Medium';
-    src: url('./Comfortaa-Medium.ttf');
-}
+
+
 Button,
 CheckBox,
 ComboBox {
@@ -28,7 +28,7 @@ ComboBox {
 .root {
     -fx-background-color: transparent;
     /* Подключение Font Family Шрифтов */
-    -fx-font-family: 'Comfortaa';
+    -fx-font-family: 'Inter 18pt';
 }
 TextArea,
 .icon-button,
@@ -52,10 +52,8 @@ ComboBox .arrow,
 ComboBox .arrow-button {
     -fx-background-color: transparent;
 }
-.scene-header {
-    -fx-font-weight: bold;
-    -fx-font-size: 20px;
-    -fx-text-fill: -fx-black2C;
+#header {
+    -fx-background-color:#f2f4f7;
 }
 /*-- Скругление блоков и кнопок --*/
 .b-5 {
@@ -74,12 +72,12 @@ ComboBox .arrow-button {
 }
 /*-- Импорт фона --*/
 .background {
-    -fx-background-image: url('../images/background.png');
-    -fx-background-size: cover;
+    -fx-background-color:#fff;
+
 }
 .blur {
-    -fx-background-image: url('../images/background-blur.png') !important;
-    -fx-background-size: cover;
+    -fx-background-color:#fff;
+
 }
 /* (тех. Кнопки) */
 .invisible {
@@ -112,6 +110,34 @@ ComboBox .arrow-button {
 .tooltip {
     -fx-show-delay: 100ms;
     -fx-font-size: 12px;
+}
+#exit{
+    -fx-background-image: url("../images/icons/exit.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+#hide{
+    -fx-fill:transparent;
+}
+#exit,#hide{
+    
+    -fx-padding:0;
+    -fx-background-color:transparent;
+}
+#exit:hover,#hide:hover{
+    -fx-opacity:0.9;
+    -fx-padding:0;
+    -fx-background-color:transparent;
+}
+#deauth{
+    -fx-padding: 0;
+    -fx-background-color:transparent;
+}
+#deauth_svg{
+    -fx-fill:transparent;
+    -fx-stroke:#797A7C;
+    -fx-stroke-width: 2.69;
 }
 .tooltip>.tooltip {
     -fx-background-color: -fx-black2C;
@@ -193,9 +219,9 @@ CheckBox {
     -fx-text-fill: -fx-black2C;
     -fx-background-image: url('../images/icons/checkbox1_off.png');
     -fx-background-repeat: no-repeat;
-    -fx-label-padding: 0 0 0 10px;
+    /* -fx-label-padding: 0 0 0 10px; */
     -fx-font-size: 14px;
-    -fx-text-align: left;
+    /* -fx-text-align: left; */
 }
 CheckBox:selected {
     -fx-background-image: url('../images/icons/checkbox1_on.png');
@@ -242,23 +268,22 @@ ScrollBar:vertical .thumb {
 }
 /* combo-box элементы */
 ComboBox {
-    -fx-background-color: -fx-glass;
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-    -fx-background-radius: 10px;
-    -fx-padding: 5;
-    -fx-text-fill: -fx-black2C;
+    -fx-background-color: #FD7E14;
+
+    -fx-background-radius: 7.84;
+    -fx-padding: 0 0 0 16.29;
+    -fx-text-fill: #fff;
     -fx-alignment: CENTER;
-    -fx-content-display: LEFT;
+    -fx-content-display: RIGHT;
 }
-ComboBox .arrow-button {
-    -fx-background-image: url('../images/icons/checkbox_arrow_button.png');
+ComboBox  .arrow-button {
+    -fx-background-image:none;
     -fx-background-repeat: no-repeat;
-    -fx-background-position: center center;
-    -fx-background-size: 20px 11px;
+
 }
 ComboBox .list-cell {
-    -fx-text-fill: -fx-black2C;
-    -fx-background-radius: 10px;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 7.84;
 }
 .combo-box-popup .list-view {
     -fx-background-color: -fx-gray;
@@ -285,11 +310,12 @@ ComboBox .list-cell {
     -fx-text-fill: -fx-black2C;
 }
 ComboBox .arrow {
+    
     -fx-background-color: transparent;
 }
 .anchor-block-information {
     -fx-padding: 15px;
-    -fx-background-color: -fx-whiteGA;
+    /* -fx-background-color: -fx-whiteGA; */
     -fx-background-radius: 15px;
 }
 Separator:horizontal .line,

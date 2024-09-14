@@ -36,7 +36,7 @@ public class VisualDownloader {
     private volatile Downloader downloader;
 
     private final ProgressBar progressBar;
-    private final Label speed;
+
     private final Label volume;
 
     private final Consumer<Throwable> errorHandle;
@@ -45,11 +45,11 @@ public class VisualDownloader {
 
     private final ExecutorService executor;
 
-    public VisualDownloader(JavaFXApplication application, ProgressBar progressBar, Label speed, Label volume,
+    public VisualDownloader(JavaFXApplication application, ProgressBar progressBar, Label volume,
             Consumer<Throwable> errorHandle, Consumer<String> addLog, Consumer<UpdateScene.DownloadStatus> updateStatus) {
         this.application = application;
         this.progressBar = progressBar;
-        this.speed = speed;
+
         this.volume = volume;
         this.errorHandle = errorHandle;
         this.addLog = addLog;
@@ -371,7 +371,6 @@ public class VisualDownloader {
             ContextHelper.runInFxThreadStatic(() -> {
                 volume.setText("%.1f/%.1f MB".formatted((double) newValue / (1024.0 * 1024.0),
                                                            (double) totalSize.get() / (1024.0 * 1024.0)));
-                speed.setText(speedFormat);
             });
             lastUpdateTime.set(currentTime);
             lastDownloaded.set(newValue);

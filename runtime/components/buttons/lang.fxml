@@ -14,7 +14,4 @@
         <ContextMenu id="langChoice">
         </ContextMenu>
     </contextMenu>
-    <tooltip>
-        <Tooltip anchorLocation="WINDOW_BOTTOM_LEFT" text="%runtime.scenes.login.langTooltip" />
-    </tooltip>
 </Button>

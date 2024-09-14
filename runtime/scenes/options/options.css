@@ -1,29 +1,46 @@
 /* --START-- Чекбоксы, стили добавляются в коде */
 .optional-container {
     -fx-background-color: transparent;
-    -fx-padding: 15 0 0 15px;
+    /* -fx-padding: 15 0 0 15px; */
     -fx-cursor: hand;
 }
+.optional-container HBox > VBox {
+    -fx-padding: 0 0 0 10;
+}
 .optional-checkbox {
+     -fx-padding: 0 14 0 0; 
+     /* -fx-background-color: black; */
     -fx-text-fill: -fx-black2C;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
+.optional-nameLabel {
+    -fx-text-fill: -fx-black2C;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    /* -fx-label-padding: 0 20 0 30px; */
+}
 .optional-label {
     -fx-text-fill: -fx-black2C;
     -fx-font-size: 12px;
-    -fx-label-padding: 0 20 0 30px;
+    /* -fx-label-padding: 0 20 0 30px; */
 }
 .optional-library {
     -fx-background-color: -fx-violetTr;
     -fx-background-radius: 10px;
     -fx-text-fill: -fx-black2C;
-    -fx-padding: 2px 5px 2px 5px;
+    /* -fx-padding: 2px 5px 2px 5px; */
 }
 .optional-library-container {
     -fx-spacing: 10;
-    -fx-padding: 0 20 0 30px;
+    /* -fx-padding: 0 20 0 30px; */
 }
+
+#background_optional{
+    -fx-background-color:#EDEFF2;
+    -fx-background-radius:10;
+}
+
 /* --END-- */
 TabPane {
     -fx-tab-min-height: 40px;
@@ -34,25 +51,64 @@ TabPane StackPane {
     -fx-background-color: transparent;
 }
 TabPane .tab:selected {
-    -fx-background-color: transparent, -fx-violet;
+    -fx-background-color: #FD7E14;
+    -fx-background-radius:10;
+    -fx-border-color: none;
 }
 TabPane .tab {
-    -fx-background-color: transparent, -fx-grayATr;
-    -fx-background-radius: 10px;
+    -fx-text-fill:#fff;
+
+    -fx-background-color: #9e9e9e;
+    /* -fx-background-color: transparent, -fx-grayATr; */
+    -fx-background-radius:10;
     -fx-background-insets: 0 2.5 0 2.5;
-    -fx-padding: 0px 20px 0px 20px;
+    -fx-padding: 0px 40px 0px 40px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 TabPane .tab Label {
     -fx-font-size: 12px;
-    -fx-font-weight: 800;
-    -fx-text-fill: -fx-black;
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size:12;
+    -fx-text-fill:#fff;
 }
 TabPane .tab:selected Label {
     -fx-font-size: 12px;
-    -fx-font-weight: 800;
-    -fx-text-fill: -fx-white;
+
+    -fx-text-fill: #fff;
+    -fx-background-color:#FD7E14;
+    -fx-border-insets: none;
 }
 
 TabPane:focused .tab {
     -fx-focus-color: transparent;
+}
+#save{
+    -fx-background-color:#FD7E14;
+    -fx-background-radius:10;
+    -fx-text-fill:#fff;
+    -fx-font-size:14;
+    -fx-font-family: 'Inter 18pt Medium';
+}
+#home,#servers,#acc,#config{
+    -fx-cursor:hand;
+}
+#home>#home_text{-fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#home>#home_svg{-fx-fill:#797A7C;}
+#servers2>#servers_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+#servers2>#servers_text{    -fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#acc>#acc_svg{    -fx-fill:#797A7C; -fx-stroke:#797A7C;}
+#acc>#acc_text{    -fx-font-size:14; -fx-font-family: 'Inter 18pt'; -fx-text-fill:#797A7C;}
+#mods>#mods_svg{    -fx-fill:transparent; -fx-stroke:#fd7e14;}
+#mods>#mods_text{    -fx-font-size:14;    -fx-font-family: 'Inter 18pt'; -fx-text-fill:#fd7e14;}
+#config>#config_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+#config>#config_text{    -fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#cube{
+    -fx-fill:transparent;
+    -fx-stroke:#FD7E14;
+    -fx-stroke-width:2;
+}
+#tittle{
+    -fx-font-family: 'Inter 18pt Medium';
+    -fx-font-size:18;
 }

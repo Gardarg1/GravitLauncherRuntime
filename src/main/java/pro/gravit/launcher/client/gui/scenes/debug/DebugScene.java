@@ -35,6 +35,43 @@ public class DebugScene extends AbstractScene implements LaunchService.ClientIns
 
     @Override
     protected void doInit() {
+
+
+        LookupHelper.lookup(layout,  "#config").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.settingsScene);
+                application.gui.settingsScene.reset();
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+
+        LookupHelper.lookup(layout,  "#mods").setOnMouseClicked((e) -> {
+            try {
+                if (application.profilesService.getProfile() == null) return;
+                switchScene(application.gui.optionsScene);
+                application.gui.optionsScene.reset();
+            } catch (Exception ex) {
+                errorHandle(ex);
+            }
+        });
+        LookupHelper.lookup(layout,  "#servers2").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.serverInfoScene);
+
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+        LookupHelper.lookup(layout,  "#home").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.serverMenuScene);
+
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+
         output = LookupHelper.lookup(layout, "#output");
         LookupHelper.<ButtonBase>lookupIfPossible(header, "#controls", "#kill").ifPresent((x) -> x.setOnAction((e) -> {
             if(clientInstance != null) clientInstance.kill();
@@ -48,16 +85,7 @@ public class DebugScene extends AbstractScene implements LaunchService.ClientIns
             Clipboard clipboard = Clipboard.getSystemClipboard();
             clipboard.setContent(clipboardContent);
         }));
-        LookupHelper.<ButtonBase>lookup(header, "#back").setOnAction((e) -> {
-            if(clientInstance != null) {
-                clientInstance.unregisterListener(this);
-            }
-            try {
-                switchScene(application.gui.serverInfoScene);
-            } catch (Exception ex) {
-                errorHandle(ex);
-            }
-        });
+
     }
 
 

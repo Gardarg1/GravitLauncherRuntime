@@ -25,6 +25,7 @@ import pro.gravit.launcher.request.cabinet.AssetUploadInfoRequest;
 import pro.gravit.utils.helper.IOHelper;
 import pro.gravit.utils.helper.JVMHelper;
 import pro.gravit.utils.helper.LogHelper;
+import pro.gravit.launcher.client.gui.scenes.settings.components.LanguageSelectorComponent;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +34,7 @@ import java.text.MessageFormat;
 import java.util.function.Consumer;
 
 public class SettingsScene extends AbstractScene {
+    private LanguageSelectorComponent languageSelectorComponent;
 
     private final static long MAX_JAVA_MEMORY_X64 = 32 * 1024;
     private final static long MAX_JAVA_MEMORY_X32 = 1536;
@@ -40,6 +42,7 @@ public class SettingsScene extends AbstractScene {
     private Pane settingsList;
     private Label ramLabel;
     private Slider ramSlider;
+    private ProgressBar ramBar;
     private RuntimeSettings.ProfileSettingsView profileSettings;
     private JavaSelectorComponent javaSelector;
     private ImageView avatar;
@@ -51,32 +54,59 @@ public class SettingsScene extends AbstractScene {
 
     @Override
     protected void doInit() {
-        /** -- UserBlock START -- */
-        avatar = LookupHelper.lookup(layout, "#avatar");
-        originalAvatarImage = avatar.getImage();
-        LookupHelper.<ImageView>lookupIfPossible(layout, "#avatar").ifPresent((h) -> {
+
+        LookupHelper.lookup(layout,  "#mods").setOnMouseClicked((e) -> {
             try {
-                JavaFxUtils.setStaticRadius(h, DesignConstants.AVATAR_IMAGE_RADIUS);
-                h.setImage(originalAvatarImage);
-            } catch (Throwable e) {
-                LogHelper.warning("Skin head error");
-            }
-        });
-        /** -- UserBlock END -- */
-        componentList = (Pane) LookupHelper.<ScrollPane>lookup(layout, "#settingslist").getContent();
-        settingsList = LookupHelper.lookup(componentList, "#settings-list");
-        LookupHelper.<ButtonBase>lookup(header, "#controls", "#console").setOnAction((e) -> {
-            try {
-                if (application.gui.consoleStage == null) application.gui.consoleStage = new ConsoleStage(application);
-                if (application.gui.consoleStage.isNullScene())
-                    application.gui.consoleStage.setScene(application.gui.consoleScene);
-                application.gui.consoleStage.show();
+                if (application.profilesService.getProfile() == null) return;
+                switchScene(application.gui.optionsScene);
+                application.gui.optionsScene.reset();
             } catch (Exception ex) {
                 errorHandle(ex);
             }
         });
+        LookupHelper.lookup(layout,  "#config").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.settingsScene);
+                application.gui.settingsScene.reset();
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+        LookupHelper.lookup(layout,  "#servers2").setOnMouseClicked((e) -> {
+            try {
+                switchScene(application.gui.serverInfoScene);
+
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+
+        LookupHelper.lookup(layout,  "#home").setOnMouseClicked((e) -> {
+            try {
+      switchScene(application.gui.serverMenuScene);
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+
+        LookupHelper.lookup(layout,  "#save").setOnMouseClicked((e) -> {
+            try {
+                ClientProfile profile = application.profilesService.getProfile();
+                profileSettings.apply();
+                application.triggerManager.process(profile, application.profilesService.getOptionalView());
+                switchScene(application.gui.serverInfoScene);
+            } catch (Exception exception) {
+                errorHandle(exception);
+            }
+        });
+
+        componentList = (Pane) LookupHelper.<ScrollPane>lookup(layout, "#settingslist").getContent();
+        settingsList = LookupHelper.lookup(componentList, "#settings-list");
+        languageSelectorComponent = new LanguageSelectorComponent(application, componentList);
 
         ramSlider = LookupHelper.lookup(componentList, "#ramSlider");
+        ramBar = LookupHelper.lookup(componentList, "#ramBar");
+
         ramLabel = LookupHelper.lookup(componentList, "#ramLabel");
         long maxSystemMemory;
         try {
@@ -153,15 +183,15 @@ public class SettingsScene extends AbstractScene {
                                                 "runtime.scenes.settings.deletedir.fail.description"));
                             }
                         }, () -> {}, true)));
-        LookupHelper.<ButtonBase>lookupIfPossible(layout, "#back").ifPresent(a -> a.setOnAction((e) -> {
-            try {
-                profileSettings = null;
-                switchScene(application.gui.serverInfoScene);
-            } catch (Exception exception) {
-                errorHandle(exception);
-            }
-        }));
+
         reset();
+    }
+    private void updateRamBar() {
+        double maxRam = ramSlider.getMax();
+        double currentRam = ramSlider.getValue();
+        double progress = currentRam / maxRam;
+
+        ramBar.setProgress(progress);
     }
 
     private long getJavaMaxMemory() {
@@ -181,23 +211,11 @@ public class SettingsScene extends AbstractScene {
         ramSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             profileSettings.ram = newValue.intValue();
             updateRamLabel();
+            updateRamBar(); // Обновляем ProgressBar
         });
         updateRamLabel();
-        Pane serverButtonContainer = LookupHelper.lookup(layout, "#serverButton");
-        serverButtonContainer.getChildren().clear();
-        ClientProfile profile = application.profilesService.getProfile();
-        ServerButton serverButton = ServerMenuScene.getServerButton(application, profile);
-        serverButton.addTo(serverButtonContainer);
-        serverButton.enableSaveButton(null, (e) -> {
-            try {
-                profileSettings.apply();
-                application.triggerManager.process(profile, application.profilesService.getOptionalView());
-                switchScene(application.gui.serverInfoScene);
-            } catch (Exception exception) {
-                errorHandle(exception);
-            }
-        });
-        serverButton.enableResetButton(null, (e) -> reset());
+        updateRamBar();
+
         settingsList.getChildren().clear();
         Label settingsListHeader = new Label(application.getTranslation("runtime.scenes.settings.header.options"));
         settingsListHeader.getStyleClass().add("settings-header");
@@ -208,42 +226,15 @@ public class SettingsScene extends AbstractScene {
         if(JVMHelper.OS_TYPE == JVMHelper.OS.LINUX) {
             add("WaylandSupport", profileSettings.waylandSupport, (value) -> profileSettings.waylandSupport = value);
         }
-        /** -- UserBlock START -- */
-        LookupHelper.<Label>lookupIfPossible(layout, "#nickname")
-                    .ifPresent((e) -> e.setText(application.authService.getUsername()));
-        LookupHelper.<Label>lookupIfPossible(layout, "#role")
-                    .ifPresent((e) -> e.setText(application.authService.getMainRole()));
-        avatar.setImage(originalAvatarImage);
-        resetAvatar();
-        if(application.authService.isFeatureAvailable(GetAssetUploadUrlRequestEvent.FEATURE_NAME)) {
-            LookupHelper.<Button>lookupIfPossible(layout, "#customization").ifPresent((h) -> {
-                h.setVisible(true);
-                h.setOnAction((a) -> {
-                    processRequest(application.getTranslation("runtime.overlay.processing.text.uploadassetinfo"), new AssetUploadInfoRequest(), (info) -> {
-                        contextHelper.runInFxThread(() -> {
-                            showOverlay(application.gui.uploadAssetOverlay, (f) -> {
-                                application.gui.uploadAssetOverlay.onAssetUploadInfo(info);
-                            });
-                        });
-                    }, this::errorHandle, (e) -> {});
-                });
-            });
-        }
-        /** -- UserBlock END -- */
+
     }
 
-    public void resetAvatar() {
-        if (avatar == null) {
-            return;
-        }
-        JavaFxUtils.putAvatarToImageView(application, application.authService.getUsername(), avatar);
-    }
+
 
     @Override
     public String getName() {
         return "settings";
     }
-
     public void add(String languageName, boolean value, Consumer<Boolean> onChanged) {
         String nameKey = "runtime.scenes.settings.properties.%s.name".formatted(languageName.toLowerCase());
         String descriptionKey = "runtime.scenes.settings.properties.%s.description".formatted(

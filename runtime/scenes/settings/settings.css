@@ -1,45 +1,171 @@
 /* RAM настройки */
 Slider>.track {
-    -fx-background-color: linear-gradient(to right, #8d4ce0, #8543e4, #7b39e9, #702eed, #6223f2);
-    -fx-pref-height: 5px;
+    -fx-background-color: transparent;
+    -fx-pref-height: 10.25  ;
 }
 Slider>.thumb {
-    -fx-background-color: -fx-violet;
-    -fx-pref-width: 18px;
-    -fx-pref-height: 18px;
+    -fx-background-color: none;
+
+}
+#save{
+    -fx-background-color: #FD7E14;
+    -fx-background-radius: 10;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14;
+        -fx-font-family: 'Inter 18pt Medium';
+}
+
+/* Прогресс бар */
+ProgressBar {
+    -fx-indeterminate-bar-flip: false;
+    -fx-background-color: -fx-whiteG;
+    -fx-background-radius: 30.16;
+
+}
+ProgressBar>.bar {
+    -fx-background-color: #FD7E14;
+    -fx-background-radius: 30.16;
+    -fx-background-insets: 0;
+}
+ProgressBar>.track {
+    -fx-background-color: #E6E8EB;
+    -fx-background-radius: 30.16;
+    -fx-background-insets: 0;
+}
+
+#languageCombo{
+    -fx-background-color: #E6E8EB;
+
+    -fx-background-radius: 7.84;
+
+    -fx-text-fill: #797A7C;
+    -fx-prompt-text-fill:#797A7C ;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+
+#languageCombo>  .arrow-button {
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center ;
+
+}
+#languageCombo> .list-cell {
+    -fx-text-fill: #797A7C;
+    -fx-prompt-text-fill:#797A7C ;
+    -fx-background-radius: 7.84;
+}
+
+
+
+CheckBox {
+
+    -fx-background-image: url('../images/icons/checkbox_off.png');
+    -fx-background-repeat: no-repeat;
+    -fx-padding: 15 0 0 12.75;
+    -fx-background-position: center;
+    /* -fx-label-padding: 0 0 0 10px; */
+    -fx-font-size: 14px;
+    /* -fx-text-align: left; */
+}
+CheckBox:selected {
+    -fx-background-image: url('../images/icons/checkbox_on.png');
+    -fx-background-repeat: no-repeat;
+}
+#java_text{
+    -fx-font-size: 14;
+    -fx-text-fill: #000;
+    -fx-font-family: 'Inter 18pt Medium';
+}
+#java_text_label{
+    -fx-font-size: 12;
+    -fx-text-fill: #797A7C;
+    -fx-font-family: 'Inter 18pt';
 }
 #ramLabel {
-    -fx-font-weight: bold;
-    -fx-font-size: 12px;
-    -fx-text-fill: -fx-black2C;
+
+    -fx-font-size: 12.16;
+    -fx-text-fill: #000;
+    -fx-font-family: 'Inter 18pt';
 }
-.settings-header {
-    -fx-font-size: 14px;
-    -fx-font-weight: 800;
+#option_text{
+    -fx-font-size: 14;
+    -fx-text-fill: #000;
+    -fx-font-family: 'Inter 18pt Medium';
 }
 .settings-card {
-    -fx-spacing: 10;
+
 }
 .settings-container {
-    -fx-spacing: 10;
+  
 }
-.settings-label-header {
+.settings-label-header,.settings-header,#settings-header-top,#change_dir_header {
     -fx-font-size: 14px;
-    -fx-font-weight: 800;
+    -fx-font-family: 'Inter 18pt Medium';
+}
+.settings-label{    -fx-font-size: 12;
+    -fx-font-family: 'Inter 18pt';}
+    
+    
+    
+    #settings-header2{
+    -fx-font-size: 12;
+    -fx-text-fill:#797A7C;
+    -fx-font-family: 'Inter 18pt';
 }
 #folder {
     -fx-background-color: -fx-glass;
     -fx-background-radius: 10px;
 }
 #path {
-    -fx-padding: 10px;
+-fx-background-radius: 7.84;
+-fx-background-color: #E6E8EB;
+-fx-label-padding:0 0  0 12.06;
+-fx-font-family: 'Mazzard M Medium';
+-fx-text-fill: #797A7C;
+-fx-font-size: 12;
 }
+
+#changeDir_svg{
+    -fx-fill:transparent;
+    -fx-stroke:#FFFFFF;
+    -fx-stroke-width: 1.21;
+}
+
 #settingslist {
-    -fx-padding: 15px;
-    -fx-background-color: -fx-whiteGA;
-    -fx-background-radius: 15px;
+
+    -fx-background-color: transparent;
+
 }
 #changeDir {
-    -fx-background-color: -fx-white;
-    -fx-background-radius: 0 10px 10px 0;
+    -fx-background-color: #FD7E14;
+    -fx-background-radius: 7.84;
+}
+#background_settingslist{
+    -fx-background-color:#F2F4F7;
+    -fx-background-radius: 18.1;
+}
+#tittle{
+    -fx-font-family: 'Inter 18pt Medium';
+    -fx-font-size:18;
+}
+
+#home{-fx-cursor: hand;}
+#servers2{-fx-cursor: hand;}
+#home>#home_text{-fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#home>#home_svg{-fx-fill:#797A7C;}
+#servers2>#servers_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+#servers2>#servers_text{    -fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#797A7C;}
+#acc>#acc_svg{    -fx-fill:#797A7C; -fx-stroke:#797A7C;}
+#acc>#acc_text{    -fx-font-size:14; -fx-font-family: 'Inter 18pt'; -fx-text-fill:#797A7C;}
+#mods>#mods_svg{    -fx-fill:transparent; -fx-stroke:#797A7C;}
+#mods>#mods_text{    -fx-font-size:14;    -fx-font-family: 'Inter 18pt'; -fx-text-fill:#797A7C;}
+#config>#config_svg{    -fx-fill:transparent; -fx-stroke:#fd7e14;}
+#config>#config_text{    -fx-font-size:14;-fx-font-family: 'Inter 18pt';-fx-text-fill:#fd7e14;}
+    
+
+#cube{
+    -fx-fill:transparent;
+    -fx-stroke:#FD7E14;
+    -fx-stroke-width:2;
 }

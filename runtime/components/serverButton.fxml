@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane id="serverButton" fx:id="serverButton" minWidth="-Infinity" prefHeight="350.0" prefWidth="175.0" styleClass="b-20" stylesheets="@components.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <Region id="serverLogo" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
-
-    <!-- Информация сервера -->
-    <Label id="nameServer" alignment="CENTER" prefHeight="29.0" text="SERVERNAME" textAlignment="CENTER" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-    <Label id="genreServer" alignment="CENTER" prefHeight="17.0" prefWidth="189.0" text="HITECH" textAlignment="CENTER" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-    <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
-        <children>
-            <Label id="online" alignment="CENTER" maxWidth="40.0" prefWidth="40.0" styleClass="online-green" text="?" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="-6.0" />
-            <Label id="speedLoad" alignment="CENTER" maxWidth="75.0" prefWidth="75.0" styleClass="online-violet" text="0 m/s" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="-6.0" />
-            <Button id="reset" maxWidth="75.0" prefWidth="75.0" text="%runtime.components.serverButton.reset" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="-6.0">
-                <tooltip>
-                    <Tooltip anchorLocation="WINDOW_BOTTOM_LEFT" text="%runtime.components.serverButton.resetTooltip" />
-                </tooltip>
-            </Button>
-            <Button id="save" prefHeight="55.0" text="%runtime.components.serverButton.save" visible="false" AnchorPane.bottomAnchor="-15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-        </children>
-    </AnchorPane>
+<AnchorPane id="serverButton" fx:id="serverButton" minHeight="163.0" minWidth="-Infinity" prefHeight="163.0" prefWidth="249.0" styleClass="b-20" stylesheets="@components.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+   
+       <!-- Информация сервера -->
+       <Label id="nameServer" prefHeight="29.0" text="SERVERNAME" textAlignment="CENTER" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="73.0" AnchorPane.topAnchor="14.0" />
+       <Label id="genreServer" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="189.0" text="HITECH" textAlignment="CENTER" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="73.0" AnchorPane.topAnchor="44.0" />
+      <AnchorPane id="online_block" layoutX="182.13" layoutY="14.0" AnchorPane.rightAnchor="12.88" AnchorPane.topAnchor="13.81">
+         <children>
+            <HBox alignment="CENTER" maxWidth="75.0" minWidth="55.0" prefHeight="18.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <SVGPath content="M8.25193 8.96019H8.88407C9.35116 8.96019 9.7581 8.56945 9.60971 8.12656C9.38358 7.45161 8.82722 7.04344 7.84919 6.90205M6.55835 5.51994C6.68139 5.55884 6.82233 5.57725 6.98117 5.57725C7.68595 5.57725 8.03834 5.21479 8.03834 4.30864C8.03834 3.4025 7.68595 3.04004 6.98117 3.04004C6.82233 3.04004 6.68139 3.05845 6.55835 3.09734M4.44396 6.84585C5.97197 6.84585 6.78645 7.27275 7.0725 8.12656C7.22088 8.56945 6.81395 8.96019 6.34686 8.96019H2.54105C2.07396 8.96019 1.66703 8.56945 1.81541 8.12656C2.10146 7.27275 2.91594 6.84585 4.44396 6.84585ZM4.44396 5.57725C5.14874 5.57725 5.50113 5.21479 5.50113 4.30864C5.50113 3.4025 5.14874 3.04004 4.44396 3.04004C3.73918 3.04004 3.38678 3.4025 3.38678 4.30864C3.38678 5.21479 3.73918 5.57725 4.44396 5.57725Z" fillRule="EVEN_ODD">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label id="online" alignment="CENTER" text="0\100">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
